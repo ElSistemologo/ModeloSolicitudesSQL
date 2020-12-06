@@ -50,7 +50,9 @@ public class ModeloSolicitudes {
      * @param Pass
      * @return
      */
-    public int InicioSesion(String Usuario, String Pass  ){
+           
+    //METODO PARA AUTENTIFICACION DE USUARIOS
+    public static int InicioSesion(String Usuario, String Pass  ){
                 int resultado = 0;
                 
                 try {
@@ -77,7 +79,35 @@ public class ModeloSolicitudes {
                 
                 return resultado ;
             }
-            
+    //METODO PARA COMPROBAR CARGO DE USUARIOS
+    
+    public static String CargoUsuario(String Usuario ){
+                String cargo = "";
+                
+                try {
+                    String SQL_call = "{call PA_ComprobacionCargo(?,?)}";
+                    //Statement s = conexion.createStatement();
+                    conexion = DriverManager.getConnection(server,user,password);
+                    CallableStatement cstmt = conexion.prepareCall(SQL_call); 
+                    cstmt.setString(1 ,Usuario );
+                    cstmt.registerOutParameter(2, Types.VARCHAR);
+                    cstmt.execute(); 
+                    cargo = cstmt.getNString(2);
+                    
+                    //ResultSet procObr = s.executeQuery ("CAll PA_obra (300,1000,@CantActualizacion_obras)");
+                    System.out.println("Ejecutando procedimiento " + cstmt );
+                    System.out.println("Procedimiento Almacenado ejecutado con éxito  ..... OK");     
+                    
+                    return cargo ;
+                } catch (SQLException ex) {
+                    System.out.println("Imposible realizar procedimento almacenado ... FAIL");
+                    
+                    }
+                
+                
+                return cargo ;
+            }
+        
             
     public static void main(String[] args) {
         //conectar
@@ -94,9 +124,9 @@ public class ModeloSolicitudes {
      * @param args the command line arguments
      */
         //ConsultaTest();
-
-        //System.out.println("-->"+InicioSesion("hol1","hol11234"));
         
+        //System.out.println("-->"+InicioSesion("hol1","hol11234"));
+        //System.out.println(CargoUsuario("secretari1"));
         
         //desconectar
         try {

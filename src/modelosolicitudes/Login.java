@@ -14,7 +14,8 @@ import javax.swing.JOptionPane;
  * @author Leand
  */
 public class Login extends javax.swing.JFrame {
-
+    public static String usuario ;
+    public static String pass ;
     /**
      * Creates new form panel_control
      */
@@ -123,8 +124,8 @@ public class Login extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        String usuario = formFieldUsuario.getText();
-        String pass = formFieldPassword.getText();
+        usuario = formFieldUsuario.getText();
+        pass = formFieldPassword.getText();
         
         
         if(usuario.isEmpty() || pass.isEmpty()){
@@ -135,6 +136,9 @@ public class Login extends javax.swing.JFrame {
             access = inicio.InicioSesion(usuario, pass);
             if(access == 1){
                 JOptionPane.showMessageDialog(null,access + "ACCESS GRANTED" );
+                Panel_control1 pc = new Panel_control1();
+                pc.setVisible(true);
+                this.dispose();
             } else {
                  JOptionPane.showMessageDialog(null,access + "ACCESS  not GRANTED" );
             }
