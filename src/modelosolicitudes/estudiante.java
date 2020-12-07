@@ -131,7 +131,7 @@ public class estudiante extends javax.swing.JFrame {
 
         jBSolNAprobadas.setText("Justificación");
 
-        jLSolNAprobadas.setText("Escriba el número de la solicitud en el siguiente recuadro y despues presione \"Justificación\" para observar la descripción de la solicitud.");
+        jLSolNAprobadas.setText("Escriba el número de la solicitud en el siguiente recuadro y despues precione \"Justificación\" para observar la descripción de la solicitud.");
 
         jTSolNAprobadas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -179,7 +179,7 @@ public class estudiante extends javax.swing.JFrame {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "Número", "Nombre del Secretario", "Fecha de recepción", "Tipo de solicitud", "Estado de la solicitud", "Fecha de aprobación"
+                "Número", "Nombre del Secretario", "Fecha de recepción", "Tipo de solicitud", "Estado de la solicitud", "Fecha de aprovación"
             }
         ) {
             Class[] types = new Class [] {
@@ -208,7 +208,7 @@ public class estudiante extends javax.swing.JFrame {
             }
         });
 
-        jLSolAprobadas.setText("Escriba el número de la solicitud en el siguiente recuadro y despues presione \"Justificación\" para observar la descripción de la solicitud.");
+        jLSolAprobadas.setText("Escriba el número de la solicitud en el siguiente recuadro y despues precione \"Justificación\" para observar la descripción de la solicitud.");
 
         javax.swing.GroupLayout jPSolAprobadasLayout = new javax.swing.GroupLayout(jPSolAprobadas);
         jPSolAprobadas.setLayout(jPSolAprobadasLayout);
