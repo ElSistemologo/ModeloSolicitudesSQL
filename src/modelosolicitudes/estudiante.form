@@ -131,7 +131,7 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Informaci&#xf3;n Basica"/>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Default Cursor"/>
+              <Color id="Cursor Por defecto"/>
             </Property>
             <Property name="horizontalTextPosition" type="int" value="10"/>
           </Properties>
@@ -146,7 +146,7 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Solicitudes"/>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Default Cursor"/>
+              <Color id="Cursor Por defecto"/>
             </Property>
             <Property name="horizontalTextPosition" type="int" value="10"/>
             <Property name="selected" type="boolean" value="true"/>
@@ -159,7 +159,7 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Asignaturas"/>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Default Cursor"/>
+              <Color id="Cursor Por defecto"/>
             </Property>
             <Property name="horizontalTextPosition" type="int" value="10"/>
           </Properties>
@@ -175,7 +175,7 @@
             <Property name="text" type="java.lang.String" value="Eliminar Solicitudes"/>
             <Property name="autoscrolls" type="boolean" value="true"/>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Default Cursor"/>
+              <Color id="Cursor Por defecto"/>
             </Property>
             <Property name="horizontalTextPosition" type="int" value="10"/>
           </Properties>
@@ -283,7 +283,7 @@
                       </TableColumnModel>
                     </Property>
                     <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                      <Color id="Default Cursor"/>
+                      <Color id="Cursor Por defecto"/>
                     </Property>
                     <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                       <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
@@ -299,7 +299,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLSolNAprobadas">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Escriba el n&#xfa;mero de la solicitud en el siguiente recuadro y despues precione &quot;Justificaci&#xf3;n&quot; para observar la descripci&#xf3;n de la solicitud."/>
+                <Property name="text" type="java.lang.String" value="Escriba el n&#xfa;mero de la solicitud en el siguiente recuadro y despues presione &quot;Justificaci&#xf3;n&quot; para observar la descripci&#xf3;n de la solicitud."/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="jTSolNAprobadas">
@@ -377,7 +377,7 @@
                         <Column editable="false" title="Fecha de recepci&#xf3;n" type="java.lang.String"/>
                         <Column editable="false" title="Tipo de solicitud" type="java.lang.String"/>
                         <Column editable="false" title="Estado de la solicitud" type="java.lang.String"/>
-                        <Column editable="false" title="Fecha de aprovaci&#xf3;n" type="java.lang.String"/>
+                        <Column editable="false" title="Fecha de aprobaci&#xf3;n" type="java.lang.String"/>
                       </Table>
                     </Property>
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -402,10 +402,20 @@
                           <Editor/>
                           <Renderer/>
                         </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
                       </TableColumnModel>
                     </Property>
                     <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                      <Color id="Default Cursor"/>
+                      <Color id="Cursor Por defecto"/>
                     </Property>
                     <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                       <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
@@ -426,7 +436,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLSolAprobadas">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Escriba el n&#xfa;mero de la solicitud en el siguiente recuadro y despues precione &quot;Justificaci&#xf3;n&quot; para observar la descripci&#xf3;n de la solicitud."/>
+                <Property name="text" type="java.lang.String" value="Escriba el n&#xfa;mero de la solicitud en el siguiente recuadro y despues presione &quot;Justificaci&#xf3;n&quot; para observar la descripci&#xf3;n de la solicitud."/>
               </Properties>
             </Component>
           </SubComponents>
