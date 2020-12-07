@@ -98,7 +98,26 @@ public class Panel_control1 extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
         Cargo_User=ModeloSolicitudes.CargoUsuario(Login.usuario);
-        JOptionPane.showMessageDialog(null, Cargo_User+"JUASJ" );
+        JOptionPane.showMessageDialog(null, Cargo_User );
+        System.out.println(Cargo_User);
+        if( Cargo_User.equals("secretario") == true ){
+            JOptionPane.showMessageDialog(null, Cargo_User + "YEY" );
+            System.out.println("cargo" + Cargo_User);
+            SecretarioSol sec1 = new SecretarioSol();
+            sec1.setVisible(true);
+            this.dispose();
+        
+        } else if (Cargo_User.equals("estudiante") == true){
+            JOptionPane.showMessageDialog(null, Cargo_User + "YEY" );
+            System.out.println("cargo" + Cargo_User);
+            EstudianteAsignaturas est1 = new EstudianteAsignaturas();
+            est1.setVisible(true);
+            this.dispose();
+            
+        }
+        
+               
+        
         
     }//GEN-LAST:event_jButton1ActionPerformed
 

@@ -82,7 +82,7 @@ public class Login extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(formFieldUsuario)
                         .addComponent(formFieldPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)))
-                .addContainerGap(166, Short.MAX_VALUE))
+                .addContainerGap(346, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -97,7 +97,7 @@ public class Login extends javax.swing.JFrame {
                     .addComponent(formFieldPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addComponent(jButton1)
-                .addContainerGap(176, Short.MAX_VALUE))
+                .addContainerGap(257, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -132,15 +132,14 @@ public class Login extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "algún campo está vacio");
         }else{
             ModeloSolicitudes inicio = new ModeloSolicitudes();
-            int access;
-            access = inicio.InicioSesion(usuario, pass);
+            int access = inicio.InicioSesion(usuario, pass);
             if(access == 1){
                 JOptionPane.showMessageDialog(null,access + "ACCESS GRANTED" );
                 Panel_control1 pc = new Panel_control1();
                 pc.setVisible(true);
                 this.dispose();
             } else {
-                 JOptionPane.showMessageDialog(null,access + "ACCESS  not GRANTED" );
+                 JOptionPane.showMessageDialog(null,access + "El usuario o clave ingresada es incorrecta" );
             }
             //access = inicio.InicioSesion(usuario, pass);
             //JOptionPane.showMessageDialog(null,access );

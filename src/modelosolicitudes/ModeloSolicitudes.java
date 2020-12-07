@@ -89,8 +89,8 @@ public class ModeloSolicitudes {
                     //Statement s = conexion.createStatement();
                     conexion = DriverManager.getConnection(server,user,password);
                     CallableStatement cstmt = conexion.prepareCall(SQL_call); 
-                    cstmt.setString(1 ,Usuario );
-                    cstmt.registerOutParameter(2, Types.VARCHAR);
+                    cstmt.setString(1 ,Usuario);
+                    cstmt.registerOutParameter(2,Types.VARCHAR);
                     cstmt.execute(); 
                     cargo = cstmt.getNString(2);
                     
