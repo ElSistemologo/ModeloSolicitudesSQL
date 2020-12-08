@@ -96,9 +96,19 @@ public class EstudianteSol extends javax.swing.JFrame {
         jBSol3.setAutoscrolls(true);
         jBSol3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jBSol3.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        jBSol3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBSol3ActionPerformed(evt);
+            }
+        });
 
         jButton8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton8.setText("Consultar tipos de solicitudes");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
 
         jPSolNAprobadas.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Solicitudes sin aprobar", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
 
@@ -329,16 +339,21 @@ public class EstudianteSol extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRegresarActionPerformed
-        // TODO add your handling code here:
-
+        Login est_log = new Login(); //nueva ventana inicial - volver a iniciar seción
+        est_log.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jBRegresarActionPerformed
 
     private void jBAsignaturasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAsignaturasActionPerformed
-        // TODO add your handling code here:
+        EstudianteAsignaturas est_asig = new EstudianteAsignaturas(); //nueva ventana de asignaturas
+        est_asig.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jBAsignaturasActionPerformed
 
     private void jBInformacionBasicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBInformacionBasicaActionPerformed
-        // TODO add your handling code here:
+        EstudiantePersonalInfo est_info = new EstudiantePersonalInfo(); //nueva ventana de información personal
+        est_info.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jBInformacionBasicaActionPerformed
 
     private void jTSolNAprobadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTSolNAprobadasActionPerformed
@@ -348,6 +363,18 @@ public class EstudianteSol extends javax.swing.JFrame {
     private void jTFSolAprobadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFSolAprobadasActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTFSolAprobadasActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        TipoSolicitud est_tipo = new TipoSolicitud(); //nueva ventana de tipos de solicitudes
+        est_tipo.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jBSol3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSol3ActionPerformed
+        EstudianteDel est_del = new EstudianteDel(); //nueva ventana de eliminar solicitud
+        est_del.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jBSol3ActionPerformed
 
     /**
      * @param args the command line arguments

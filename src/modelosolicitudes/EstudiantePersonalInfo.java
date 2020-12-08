@@ -80,6 +80,11 @@ public class EstudiantePersonalInfo extends javax.swing.JFrame {
         jBSolicitudes.setText("Solicitudes");
         jBSolicitudes.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jBSolicitudes.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        jBSolicitudes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBSolicitudesActionPerformed(evt);
+            }
+        });
 
         jBAsignaturas.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jBAsignaturas.setText("Asignaturas");
@@ -212,8 +217,7 @@ public class EstudiantePersonalInfo extends javax.swing.JFrame {
                                     .addComponent(jTFUpdateContraseña)
                                     .addComponent(jTextField6)
                                     .addComponent(jTFUpdateTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jSPInformacion, javax.swing.GroupLayout.PREFERRED_SIZE, 681, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jSPInformacion, javax.swing.GroupLayout.PREFERRED_SIZE, 681, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jBRegresar)))
@@ -269,12 +273,16 @@ public class EstudiantePersonalInfo extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRegresarActionPerformed
-        // TODO add your handling code here:
+        Login est_log = new Login(); //nueva ventana inicial - volver a iniciar seción
+        est_log.setVisible(true);
+        this.dispose();
 
     }//GEN-LAST:event_jBRegresarActionPerformed
 
     private void jBAsignaturasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAsignaturasActionPerformed
-        // TODO add your handling code here:
+        EstudianteAsignaturas est_asig = new EstudianteAsignaturas(); //nueva ventana de asignaturas
+        est_asig.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jBAsignaturasActionPerformed
 
     private void jBUpdateNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBUpdateNombreActionPerformed
@@ -304,6 +312,12 @@ public class EstudiantePersonalInfo extends javax.swing.JFrame {
     private void jBUpdateCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBUpdateCorreoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jBUpdateCorreoActionPerformed
+
+    private void jBSolicitudesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSolicitudesActionPerformed
+        EstudianteSol est_sol = new EstudianteSol(); // nueva ventana de solicitudes para estudiante
+        est_sol.setVisible(true);
+        this.dispose();        
+    }//GEN-LAST:event_jBSolicitudesActionPerformed
 
     /**
      * @param args the command line arguments

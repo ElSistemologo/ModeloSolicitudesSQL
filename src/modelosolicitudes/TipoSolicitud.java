@@ -42,12 +42,14 @@ public class TipoSolicitud extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(0, 240, 240));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Descripción", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
 
+        jTADescripcion.setEditable(false);
         jTADescripcion.setBackground(new java.awt.Color(100, 255, 255));
         jTADescripcion.setColumns(20);
         jTADescripcion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jTADescripcion.setLineWrap(true);
         jTADescripcion.setRows(5);
         jTADescripcion.setText("Seleccione esta opcion si desea hacer una doble titulación con otro programa de pregrado.\n Debe adjuntar el código y nombre del programa con el que desea hacer la doble titulación junto con la correspondiente justificación");
+        jTADescripcion.setFocusable(false);
         jSPDescripcion.setViewportView(jTADescripcion);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -70,6 +72,11 @@ public class TipoSolicitud extends javax.swing.JFrame {
         jCBTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Inscripción de asignaturas", "Cursar menos de la carga mínima", "Cancelación de asignaturas", "Cancelación periodo académico", "Reserva de cupo adicional", "Homologación/Convalidación/Equivalencia", "Traslado", "Reingreso", "Doble titulación", "Reembolsos", "Inscripción trabajo de grado", "otro" }));
 
         jBRegresar.setText("Regresar");
+        jBRegresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBRegresarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -110,6 +117,12 @@ public class TipoSolicitud extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jBRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRegresarActionPerformed
+        EstudianteSol est_sol = new EstudianteSol(); // nueva ventana de solicitudes para estudiante
+        est_sol.setVisible(true);
+        this.dispose(); 
+    }//GEN-LAST:event_jBRegresarActionPerformed
 
     /**
      * @param args the command line arguments

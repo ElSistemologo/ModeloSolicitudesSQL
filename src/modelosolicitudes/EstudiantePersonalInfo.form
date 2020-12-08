@@ -89,7 +89,6 @@
                               </Group>
                               <Component id="jSPInformacion" min="-2" pref="681" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -182,6 +181,9 @@
             </Property>
             <Property name="horizontalTextPosition" type="int" value="10"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBSolicitudesActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jBAsignaturas">
           <Properties>

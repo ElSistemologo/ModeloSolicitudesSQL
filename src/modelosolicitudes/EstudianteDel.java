@@ -67,11 +67,15 @@ public class EstudianteDel extends javax.swing.JFrame {
             }
         });
 
-        jBSolicitudes.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jBSolicitudes.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jBSolicitudes.setText("Solicitudes");
         jBSolicitudes.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jBSolicitudes.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        jBSolicitudes.setSelected(true);
+        jBSolicitudes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBSolicitudesActionPerformed(evt);
+            }
+        });
 
         jBAsignaturas.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jBAsignaturas.setText("Asignaturas");
@@ -236,20 +240,32 @@ public class EstudianteDel extends javax.swing.JFrame {
     }//GEN-LAST:event_jTSolNAprobadasActionPerformed
 
     private void jBAsignaturasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAsignaturasActionPerformed
-        // TODO add your handling code here:
+        EstudianteAsignaturas est_asig = new EstudianteAsignaturas(); //nueva ventana de asignaturas
+        est_asig.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jBAsignaturasActionPerformed
 
     private void jBInformacionBasicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBInformacionBasicaActionPerformed
-        // TODO add your handling code here:
+        EstudiantePersonalInfo est_info = new EstudiantePersonalInfo(); //nueva ventana de información personal
+        est_info.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jBInformacionBasicaActionPerformed
 
     private void jBRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRegresarActionPerformed
-        // TODO add your handling code here:
+        Login est_log = new Login(); //nueva ventana inicial - volver a iniciar seción
+        est_log.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jBRegresarActionPerformed
 
     private void jBSolNAprobadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSolNAprobadasActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jBSolNAprobadasActionPerformed
+
+    private void jBSolicitudesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSolicitudesActionPerformed
+        EstudianteSol est_sol = new EstudianteSol(); // nueva ventana de solicitudes para estudiante
+        est_sol.setVisible(true);
+        this.dispose(); 
+    }//GEN-LAST:event_jBSolicitudesActionPerformed
 
     /**
      * @param args the command line arguments
