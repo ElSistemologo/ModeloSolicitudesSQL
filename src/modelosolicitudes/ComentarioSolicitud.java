@@ -9,12 +9,12 @@ package modelosolicitudes;
  *
  * @author Usuario
  */
-public class TipoSolicitud extends javax.swing.JFrame {
+public class ComentarioSolicitud extends javax.swing.JFrame {
 
     /**
      * Creates new form TipoSolicitud
      */
-    public TipoSolicitud() {
+    public ComentarioSolicitud() {
         initComponents();
     }
 
@@ -31,13 +31,13 @@ public class TipoSolicitud extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jSPDescripcion = new javax.swing.JScrollPane();
         jTADescripcion = new javax.swing.JTextArea();
-        jCBTipo = new javax.swing.JComboBox<>();
         jBRegresar = new javax.swing.JButton();
+        jLSolNAprobadas = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(0, 240, 240));
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tipos de solicitud", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 24))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Justificación de la solicitud", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 24))); // NOI18N
 
         jPanel2.setBackground(new java.awt.Color(0, 240, 240));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Descripción", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
@@ -48,7 +48,7 @@ public class TipoSolicitud extends javax.swing.JFrame {
         jTADescripcion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jTADescripcion.setLineWrap(true);
         jTADescripcion.setRows(5);
-        jTADescripcion.setText("Seleccione esta opcion si desea hacer una doble titulación con otro programa de pregrado.\n Debe adjuntar el código y nombre del programa con el que desea hacer la doble titulación junto con la correspondiente justificación");
+        jTADescripcion.setText("En este espacio va la justificación de la solicitud .\nadfaewfawefasdvaññwkefñawefjiñaowieñ  aoga we  nln l  aefawe fawe awef a  awefawefawe  awe\nadawd\n awdawdad  \n awdawd ");
         jTADescripcion.setWrapStyleWord(true);
         jTADescripcion.setFocusable(false);
         jSPDescripcion.setViewportView(jTADescripcion);
@@ -59,18 +59,16 @@ public class TipoSolicitud extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jSPDescripcion, javax.swing.GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE)
+                .addComponent(jSPDescripcion, javax.swing.GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jSPDescripcion, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
+                .addComponent(jSPDescripcion, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
                 .addContainerGap())
         );
-
-        jCBTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Inscripción de asignaturas", "Cursar menos de la carga mínima", "Cancelación de asignaturas", "Cancelación periodo académico", "Reserva de cupo adicional", "Homologación/Convalidación/Equivalencia", "Traslado", "Reingreso", "Doble titulación", "Reembolsos", "Inscripción trabajo de grado", "otro" }));
 
         jBRegresar.setText("Regresar");
         jBRegresar.addActionListener(new java.awt.event.ActionListener() {
@@ -79,29 +77,34 @@ public class TipoSolicitud extends javax.swing.JFrame {
             }
         });
 
+        jLSolNAprobadas.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLSolNAprobadas.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        jLSolNAprobadas.setText("Cancelación de asignaturas");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jCBTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBRegresar))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                        .addComponent(jBRegresar))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLSolNAprobadas, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jCBTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jBRegresar)))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLSolNAprobadas, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBRegresar))
                 .addContainerGap())
         );
 
@@ -142,14 +145,18 @@ public class TipoSolicitud extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TipoSolicitud.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ComentarioSolicitud.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TipoSolicitud.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ComentarioSolicitud.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TipoSolicitud.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ComentarioSolicitud.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TipoSolicitud.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ComentarioSolicitud.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -158,14 +165,14 @@ public class TipoSolicitud extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TipoSolicitud().setVisible(true);
+                new ComentarioSolicitud().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBRegresar;
-    private javax.swing.JComboBox<String> jCBTipo;
+    private javax.swing.JLabel jLSolNAprobadas;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jSPDescripcion;

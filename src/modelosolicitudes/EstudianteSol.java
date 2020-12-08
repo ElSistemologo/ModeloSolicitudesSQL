@@ -142,16 +142,9 @@ public class EstudianteSol extends javax.swing.JFrame {
                 "Número", "Nombre del Secretario", "Fecha de recepción", "Tipo de solicitud", "Estado de la solicitud"
             }
         ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false
             };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -161,6 +154,11 @@ public class EstudianteSol extends javax.swing.JFrame {
         jSPSolNAprobadas.setViewportView(jTTSolNAprobadas);
 
         jBSolNAprobadas.setText("Justificación");
+        jBSolNAprobadas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBSolNAprobadasActionPerformed(evt);
+            }
+        });
 
         jLSolNAprobadas.setText("Escriba el número de la solicitud en el siguiente recuadro y despues precione \"Justificación\" para observar la descripción de la solicitud.");
 
@@ -211,19 +209,12 @@ public class EstudianteSol extends javax.swing.JFrame {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "Número", "Nombre del Secretario", "Fecha de recepción", "Tipo de solicitud", "Estado de la solicitud", "Fecha de aprovación"
+                "Número", "Nombre del Secretario", "Fecha de recepción", "Tipo de solicitud", "Fecha Comité Cur.", "Fecha Consejo Fac."
             }
         ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false
             };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -233,6 +224,11 @@ public class EstudianteSol extends javax.swing.JFrame {
         jSPSolAprobadas.setViewportView(jTSolAprobadas);
 
         jBSolAprobadas.setText("Justificación");
+        jBSolAprobadas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBSolAprobadasActionPerformed(evt);
+            }
+        });
 
         jTFSolAprobadas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -375,6 +371,20 @@ public class EstudianteSol extends javax.swing.JFrame {
         est_del.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jBSol3ActionPerformed
+
+    private void jBSolNAprobadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSolNAprobadasActionPerformed
+        // input (aún no se ha hecho): la justificación(string), tipo de solicitud(string)
+        ComentarioSolicitud est_com = new ComentarioSolicitud(); //nueva ventana de Comentario de solicitudes
+        est_com.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jBSolNAprobadasActionPerformed
+
+    private void jBSolAprobadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSolAprobadasActionPerformed
+        // input (aún no se ha hecho): la justificación(string), tipo de solicitud(string)
+        ComentarioSolicitud est_com = new ComentarioSolicitud(); //nueva ventana de Comentario de solicitudes
+        est_com.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jBSolAprobadasActionPerformed
 
     /**
      * @param args the command line arguments

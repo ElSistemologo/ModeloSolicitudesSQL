@@ -257,11 +257,11 @@
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                       <Table columnCount="5" rowCount="23">
-                        <Column editable="false" title="N&#xfa;mero" type="java.lang.Integer"/>
-                        <Column editable="false" title="Nombre del Secretario" type="java.lang.String"/>
-                        <Column editable="false" title="Fecha de recepci&#xf3;n" type="java.lang.String"/>
-                        <Column editable="false" title="Tipo de solicitud" type="java.lang.String"/>
-                        <Column editable="false" title="Estado de la solicitud" type="java.lang.String"/>
+                        <Column editable="false" title="N&#xfa;mero" type="java.lang.Object"/>
+                        <Column editable="false" title="Nombre del Secretario" type="java.lang.Object"/>
+                        <Column editable="false" title="Fecha de recepci&#xf3;n" type="java.lang.Object"/>
+                        <Column editable="false" title="Tipo de solicitud" type="java.lang.Object"/>
+                        <Column editable="false" title="Estado de la solicitud" type="java.lang.Object"/>
                       </Table>
                     </Property>
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -302,6 +302,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Justificaci&#xf3;n"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBSolNAprobadasActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLSolNAprobadas">
               <Properties>
@@ -378,12 +381,12 @@
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                       <Table columnCount="6" rowCount="2">
-                        <Column editable="false" title="N&#xfa;mero" type="java.lang.Integer"/>
-                        <Column editable="false" title="Nombre del Secretario" type="java.lang.String"/>
-                        <Column editable="false" title="Fecha de recepci&#xf3;n" type="java.lang.String"/>
-                        <Column editable="false" title="Tipo de solicitud" type="java.lang.String"/>
-                        <Column editable="false" title="Estado de la solicitud" type="java.lang.String"/>
-                        <Column editable="false" title="Fecha de aprovaci&#xf3;n" type="java.lang.String"/>
+                        <Column editable="false" title="N&#xfa;mero" type="java.lang.Object"/>
+                        <Column editable="false" title="Nombre del Secretario" type="java.lang.Object"/>
+                        <Column editable="false" title="Fecha de recepci&#xf3;n" type="java.lang.Object"/>
+                        <Column editable="false" title="Tipo de solicitud" type="java.lang.Object"/>
+                        <Column editable="false" title="Fecha Comit&#xe9; Cur." type="java.lang.Object"/>
+                        <Column editable="false" title="Fecha Consejo Fac." type="java.lang.Object"/>
                       </Table>
                     </Property>
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -424,6 +427,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Justificaci&#xf3;n"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBSolAprobadasActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="jTFSolAprobadas">
               <Events>
