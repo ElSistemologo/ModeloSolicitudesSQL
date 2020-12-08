@@ -7,7 +7,14 @@ package modelosolicitudes;
  */
 
 
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import static modelosolicitudes.Login.pass;
+import static modelosolicitudes.Login.usuario;
 
 /**
  *
@@ -18,6 +25,46 @@ public class EstudianteSol extends javax.swing.JFrame {
     /**
      * Creates new form panel_control
      */
+    
+    //metodo para llenar primera tabla de esta clase
+    public void llenarTabla(JTable tabla)throws Exception{
+        
+        ModeloSolicitudes inicio = new ModeloSolicitudes();
+        
+        int idUser = inicio.IdUsuario(usuario, pass) ; 
+        DefaultTableModel tablita;
+        ResultSet rs=ModeloSolicitudes.getTableSQL( "SELECT sol_id, Nombre_Secretario,  sol_Fecha, tip_tipo, estSol_nombre FROM vw_SolicitudesTodasEst WHERE per_id_Estudiante = "+ idUser );
+        
+        ResultSetMetaData rsm=rs.getMetaData();
+        ArrayList<Object[]> datos=new ArrayList<>();
+        
+        while (rs.next()) {            
+            Object[] filas=new Object[rsm.getColumnCount()];
+            //filas[0] = rs.getObject(0);
+            for (int i = 0; i < filas.length; i++) {
+                //System.out.println(rs.getObject(i));
+                filas[i]=rs.getObject(i+1);
+                //System.out.println(filas[i] + "--------------------");
+        
+                
+            }
+            
+            datos.add(filas);
+        }
+        tablita=(DefaultTableModel)tabla.getModel();
+        System.out.println(datos);
+        for (int i = 0; i < datos.size(); i++) {
+            tablita.addRow(datos.get(i));
+            //System.out.println(datos);
+        }
+        
+    }
+      
+    
+    
+    
+  
+    
     public EstudianteSol() {
         initComponents();
     }
@@ -40,10 +87,11 @@ public class EstudianteSol extends javax.swing.JFrame {
         jButton8 = new javax.swing.JButton();
         jPSolNAprobadas = new javax.swing.JPanel();
         jSPSolNAprobadas = new javax.swing.JScrollPane();
-        jTTSolNAprobadas = new javax.swing.JTable();
+        jTSolNoAprobadas = new javax.swing.JTable();
         jBSolNAprobadas = new javax.swing.JButton();
         jLSolNAprobadas = new javax.swing.JLabel();
         jTSolNAprobadas = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
         jPSolAprobadas = new javax.swing.JPanel();
         jSPSolAprobadas = new javax.swing.JScrollPane();
         jTSolAprobadas = new javax.swing.JTable();
@@ -112,7 +160,7 @@ public class EstudianteSol extends javax.swing.JFrame {
 
         jPSolNAprobadas.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Solicitudes sin aprobar", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
 
-        jTTSolNAprobadas.setModel(new javax.swing.table.DefaultTableModel(
+        jTSolNoAprobadas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -150,8 +198,8 @@ public class EstudianteSol extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTTSolNAprobadas.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jSPSolNAprobadas.setViewportView(jTTSolNAprobadas);
+        jTSolNoAprobadas.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jSPSolNAprobadas.setViewportView(jTSolNoAprobadas);
 
         jBSolNAprobadas.setText("Justificación");
         jBSolNAprobadas.addActionListener(new java.awt.event.ActionListener() {
@@ -168,6 +216,13 @@ public class EstudianteSol extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Llenar tabla");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPSolNAprobadasLayout = new javax.swing.GroupLayout(jPSolNAprobadas);
         jPSolNAprobadas.setLayout(jPSolNAprobadasLayout);
         jPSolNAprobadasLayout.setHorizontalGroup(
@@ -177,14 +232,16 @@ public class EstudianteSol extends javax.swing.JFrame {
                 .addGroup(jPSolNAprobadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jSPSolNAprobadas, javax.swing.GroupLayout.DEFAULT_SIZE, 730, Short.MAX_VALUE)
                     .addGroup(jPSolNAprobadasLayout.createSequentialGroup()
-                        .addGroup(jPSolNAprobadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPSolNAprobadasLayout.createSequentialGroup()
-                                .addGap(12, 12, 12)
-                                .addComponent(jTSolNAprobadas, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jBSolNAprobadas))
-                            .addComponent(jLSolNAprobadas, javax.swing.GroupLayout.PREFERRED_SIZE, 656, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(jLSolNAprobadas, javax.swing.GroupLayout.PREFERRED_SIZE, 656, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPSolNAprobadasLayout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(jTSolNAprobadas, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jBSolNAprobadas)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1)
+                        .addGap(87, 87, 87)))
                 .addContainerGap())
         );
         jPSolNAprobadasLayout.setVerticalGroup(
@@ -197,7 +254,8 @@ public class EstudianteSol extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPSolNAprobadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTSolNAprobadas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBSolNAprobadas))
+                    .addComponent(jBSolNAprobadas)
+                    .addComponent(jButton1))
                 .addContainerGap(33, Short.MAX_VALUE))
         );
 
@@ -386,6 +444,17 @@ public class EstudianteSol extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jBSolAprobadasActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        
+        try {
+                this.llenarTabla(jTSolNoAprobadas );
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(rootPane, e.getMessage());
+            }
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -460,6 +529,7 @@ public class EstudianteSol extends javax.swing.JFrame {
     private javax.swing.JButton jBSolAprobadas;
     private javax.swing.JButton jBSolNAprobadas;
     private javax.swing.JButton jBSolicitudes;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLSolAprobadas;
     private javax.swing.JLabel jLSolNAprobadas;
@@ -471,6 +541,6 @@ public class EstudianteSol extends javax.swing.JFrame {
     private javax.swing.JTextField jTFSolAprobadas;
     private javax.swing.JTable jTSolAprobadas;
     private javax.swing.JTextField jTSolNAprobadas;
-    private javax.swing.JTable jTTSolNAprobadas;
+    private javax.swing.JTable jTSolNoAprobadas;
     // End of variables declaration//GEN-END:variables
 }

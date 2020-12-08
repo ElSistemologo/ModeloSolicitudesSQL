@@ -1,6 +1,7 @@
 package modelosolicitudes;
 
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -14,7 +15,7 @@ import javax.swing.JOptionPane;
  * @author Leand
  */
 public class Panel_control1 extends javax.swing.JFrame {
-    
+   
     public static String Cargo_User;
     /**
      * Creates new form login
@@ -113,6 +114,13 @@ public class Panel_control1 extends javax.swing.JFrame {
             EstudianteAsignaturas est1 = new EstudianteAsignaturas();
             est1.setVisible(true);
             this.dispose();
+            EstudianteSol llenarTabla1 = new EstudianteSol();
+            
+           
+            
+            //Aqui se ejecuta el metodo que llena la tabla en EstudianteSol
+            
+            
             
         }
         
