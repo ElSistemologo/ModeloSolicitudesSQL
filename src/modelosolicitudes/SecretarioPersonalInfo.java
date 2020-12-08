@@ -57,7 +57,7 @@ public class SecretarioPersonalInfo extends javax.swing.JFrame {
         jPanel1.setName(""); // NOI18N
 
         jBRegresar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jBRegresar.setText("Regresar");
+        jBRegresar.setText("Inicio");
         jBRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBRegresarActionPerformed(evt);
