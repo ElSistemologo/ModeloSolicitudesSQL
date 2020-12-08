@@ -79,6 +79,11 @@ public class SecretarioPersonalInfo extends javax.swing.JFrame {
         jBSolicitudes.setText("Solicitudes");
         jBSolicitudes.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jBSolicitudes.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        jBSolicitudes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBSolicitudesActionPerformed(evt);
+            }
+        });
 
         jBUpdateNombre.setText("Actualizar nombre");
         jBUpdateNombre.setAutoscrolls(true);
@@ -255,8 +260,9 @@ public class SecretarioPersonalInfo extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRegresarActionPerformed
-        // TODO add your handling code here:
-
+        Login sec_log = new Login(); 
+        sec_log.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jBRegresarActionPerformed
 
     private void jBUpdateNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBUpdateNombreActionPerformed
@@ -286,6 +292,12 @@ public class SecretarioPersonalInfo extends javax.swing.JFrame {
     private void jBUpdateCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBUpdateCorreoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jBUpdateCorreoActionPerformed
+
+    private void jBSolicitudesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSolicitudesActionPerformed
+        SecretarioSol sec_sol = new SecretarioSol(); 
+        sec_sol.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jBSolicitudesActionPerformed
 
     /**
      * @param args the command line arguments
