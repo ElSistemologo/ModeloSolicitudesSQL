@@ -16,6 +16,7 @@ import javax.swing.JOptionPane;
 public class Login extends javax.swing.JFrame {
     public static String usuario ;
     public static String pass ;
+    public static int idUsuario;
     /**
      * Creates new form panel_control
      */
@@ -135,9 +136,11 @@ public class Login extends javax.swing.JFrame {
             int access = inicio.InicioSesion(usuario, pass);
             if(access == 1){
                 JOptionPane.showMessageDialog(null,access + "ACCESS GRANTED" );
+                idUsuario = inicio.IdUsuario(usuario, pass);
                 Panel_control1 pc = new Panel_control1();
                 pc.setVisible(true);
                 this.dispose();
+                
             } else {
                  JOptionPane.showMessageDialog(null,access + "El usuario o clave ingresada es incorrecta" );
             }

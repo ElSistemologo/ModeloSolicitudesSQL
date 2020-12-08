@@ -41,6 +41,9 @@ public class ModeloSolicitudes {
         return conexion;
     
     }
+    // ----------------------
+    
+    
      
     //Metodo para hacer cualquier consulta
     
@@ -142,7 +145,7 @@ public class ModeloSolicitudes {
     
    // metodo para saber id del usuario
     
-     public static int IdUsuario(String Usuario, String Pass  ){
+     public static int IdUsuario(String Usuario, String Pass ){
         int resultado = 0;
 
         try {

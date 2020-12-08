@@ -6,15 +6,20 @@ package modelosolicitudes;
  * and open the template in the editor.
  */
 
-
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
+import java.sql.Statement;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import static modelosolicitudes.Login.pass;
 import static modelosolicitudes.Login.usuario;
+import static modelosolicitudes.ModeloSolicitudes.password;
+import static modelosolicitudes.ModeloSolicitudes.server;
+import static modelosolicitudes.ModeloSolicitudes.user;
 
 /**
  *
@@ -27,38 +32,7 @@ public class EstudianteSol extends javax.swing.JFrame {
      */
     
     //metodo para llenar primera tabla de esta clase
-    public void llenarTabla(JTable tabla)throws Exception{
-        
-        ModeloSolicitudes inicio = new ModeloSolicitudes();
-        
-        int idUser = inicio.IdUsuario(usuario, pass) ; 
-        DefaultTableModel tablita;
-        ResultSet rs=ModeloSolicitudes.getTableSQL( "SELECT sol_id, Nombre_Secretario,  sol_Fecha, tip_tipo, estSol_nombre FROM vw_SolicitudesTodasEst WHERE per_id_Estudiante = "+ idUser );
-        
-        ResultSetMetaData rsm=rs.getMetaData();
-        ArrayList<Object[]> datos=new ArrayList<>();
-        
-        while (rs.next()) {            
-            Object[] filas=new Object[rsm.getColumnCount()];
-            //filas[0] = rs.getObject(0);
-            for (int i = 0; i < filas.length; i++) {
-                //System.out.println(rs.getObject(i));
-                filas[i]=rs.getObject(i+1);
-                //System.out.println(filas[i] + "--------------------");
-        
-                
-            }
-            
-            datos.add(filas);
-        }
-        tablita=(DefaultTableModel)tabla.getModel();
-        System.out.println(datos);
-        for (int i = 0; i < datos.size(); i++) {
-            tablita.addRow(datos.get(i));
-            //System.out.println(datos);
-        }
-        
-    }
+    
       
     
     
@@ -162,29 +136,7 @@ public class EstudianteSol extends javax.swing.JFrame {
 
         jTSolNoAprobadas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "Número", "Nombre del Secretario", "Fecha de recepción", "Tipo de solicitud", "Estado de la solicitud"
@@ -263,8 +215,7 @@ public class EstudianteSol extends javax.swing.JFrame {
 
         jTSolAprobadas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
                 "Número", "Nombre del Secretario", "Fecha de recepción", "Tipo de solicitud", "Fecha Comité Cur.", "Fecha Consejo Fac."
@@ -446,12 +397,41 @@ public class EstudianteSol extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        
-        try {
-                this.llenarTabla(jTSolNoAprobadas );
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(rootPane, e.getMessage());
+        int usuarioID = Login.idUsuario;
+        try{
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection conexion = DriverManager.getConnection(server,user,password);
+            
+            Statement st =  conexion.createStatement();
+            String sql = "SELECT sol_id, Nombre_Secretario, sol_Fecha, tip_tipo, estSol_nombre FROM vw_SolicitudesTodasEst where per_id_Estudiante ="+ usuarioID ;
+            ResultSet rs = st.executeQuery(sql);
+            
+            while (rs.next()) {   
+                //Datos se agregaran hasta que finalice
+                String NumeroSolicitud = String.valueOf(rs.getInt("sol_id"));
+                String Nombre_Secretario = String.valueOf(rs.getString("Nombre_Secretario"));
+                String Fecha_Solicitud = String.valueOf(rs.getDate("sol_Fecha"));
+                String Tipo_Solicitud = String.valueOf(rs.getString("tip_tipo"));
+                String Estado_Solicitud = String.valueOf(rs.getString("estSol_nombre"));
+                
+                //String Array para almacenar los datos en el Jtable
+                
+                String tbData[] = {NumeroSolicitud,Nombre_Secretario,Fecha_Solicitud,Tipo_Solicitud,Estado_Solicitud};
+                DefaultTableModel tblModel = (DefaultTableModel)jTSolNoAprobadas.getModel();
+                
+                //Finalmente se añade el lo contenido en el String Array al jtable
+                
+                tblModel.addRow(tbData);
+                
             }
+            
+            System.out.println("Datos agregados a la tabla");
+            //conexion.close();
+        }catch(Exception e){
+            System.out.println(e.getMessage()+ "No se pudo hacer la coneccion");
+        }
+        
+       
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
