@@ -257,6 +257,7 @@ public class EstudianteDel extends javax.swing.JFrame {
     private void jBSolicitudesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSolicitudesActionPerformed
         EstudianteSol est_sol = new EstudianteSol(); // nueva ventana de solicitudes para estudiante
         est_sol.setVisible(true);
+        est_sol.rellenar_tabla1();
         this.dispose(); 
     }//GEN-LAST:event_jBSolicitudesActionPerformed
 

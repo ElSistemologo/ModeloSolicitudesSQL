@@ -65,7 +65,6 @@ public class EstudianteSol extends javax.swing.JFrame {
         jBSolNAprobadas = new javax.swing.JButton();
         jLSolNAprobadas = new javax.swing.JLabel();
         jTSolNAprobadas = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
         jPSolAprobadas = new javax.swing.JPanel();
         jSPSolAprobadas = new javax.swing.JScrollPane();
         jTSolAprobadas = new javax.swing.JTable();
@@ -168,13 +167,6 @@ public class EstudianteSol extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Llenar tabla");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPSolNAprobadasLayout = new javax.swing.GroupLayout(jPSolNAprobadas);
         jPSolNAprobadas.setLayout(jPSolNAprobadasLayout);
         jPSolNAprobadasLayout.setHorizontalGroup(
@@ -191,9 +183,7 @@ public class EstudianteSol extends javax.swing.JFrame {
                         .addComponent(jTSolNAprobadas, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jBSolNAprobadas)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1)
-                        .addGap(87, 87, 87)))
+                        .addGap(87, 560, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPSolNAprobadasLayout.setVerticalGroup(
@@ -206,8 +196,7 @@ public class EstudianteSol extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPSolNAprobadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTSolNAprobadas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBSolNAprobadas)
-                    .addComponent(jButton1))
+                    .addComponent(jBSolNAprobadas))
                 .addContainerGap(33, Short.MAX_VALUE))
         );
 
@@ -433,47 +422,6 @@ public class EstudianteSol extends javax.swing.JFrame {
     }//GEN-LAST:event_jBSolAprobadasActionPerformed
 
         
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        int usuarioID = Login.idUsuario;
-        System.out.println(usuarioID);
-        try{
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection conexion = DriverManager.getConnection(server,user,password);
-            
-            Statement st =  conexion.createStatement();
-            String sql = "SELECT sol_id, Nombre_Secretario, sol_Fecha, tip_tipo, estSol_nombre FROM vw_SolicitudesTodasEst where per_id_Estudiante ="+ usuarioID ;
-            ResultSet rs = st.executeQuery(sql);
-            
-            while (rs.next()) {   
-                //Datos se agregaran hasta que finalice
-                String NumeroSolicitud = String.valueOf(rs.getInt("sol_id"));
-                String Nombre_Secretario = String.valueOf(rs.getString("Nombre_Secretario"));
-                String Fecha_Solicitud = String.valueOf(rs.getDate("sol_Fecha"));
-                String Tipo_Solicitud = String.valueOf(rs.getString("tip_tipo"));
-                String Estado_Solicitud = String.valueOf(rs.getString("estSol_nombre"));
-                
-                //String Array para almacenar los datos en el Jtable
-                
-                String tbData[] = {NumeroSolicitud,Nombre_Secretario,Fecha_Solicitud,Tipo_Solicitud,Estado_Solicitud};
-                DefaultTableModel tblModel = (DefaultTableModel)jTSolNoAprobadas.getModel();
-                
-                //Finalmente se añade el lo contenido en el String Array al jtable
-                
-                tblModel.addRow(tbData);
-                
-            }
-            
-            System.out.println("Datos agregados a la tabla");
-            //conexion.close();
-        }catch(Exception e){
-            System.out.println(e.getMessage()+ "No se pudo hacer la coneccion");
-        }
-        
-       
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -548,7 +496,6 @@ public class EstudianteSol extends javax.swing.JFrame {
     private javax.swing.JButton jBSolAprobadas;
     private javax.swing.JButton jBSolNAprobadas;
     private javax.swing.JButton jBSolicitudes;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLSolAprobadas;
     private javax.swing.JLabel jLSolNAprobadas;
