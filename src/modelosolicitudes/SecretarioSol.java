@@ -47,6 +47,7 @@ public class SecretarioSol extends javax.swing.JFrame {
     
     public void rellenar_tabla1Secretario(){
     int usuarioID = Login.idUsuario;
+    System.out.println("abc");
         try{
             Class.forName("com.mysql.jdbc.Driver");
             Connection conexion = DriverManager.getConnection(server,user,password);
@@ -57,7 +58,7 @@ public class SecretarioSol extends javax.swing.JFrame {
             st.setInt(1, usuarioID);
             st.execute();
             ResultSet rs = st.getResultSet();
-            
+            System.out.println("def");
             
             while (rs.next()) {   
                 //Datos se agregaran hasta que finalice
@@ -79,6 +80,7 @@ public class SecretarioSol extends javax.swing.JFrame {
                 //Finalmente se añade el lo contenido en el String Array al jtable
                 
                 tblModel.addRow(tbData);
+                System.out.println("ghi");
                 
             }
             

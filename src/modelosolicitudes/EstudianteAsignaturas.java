@@ -278,6 +278,35 @@ public class EstudianteAsignaturas extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
+    
+    
+    public void limpiarTablaActuales(){
+        try {
+            DefaultTableModel modelo=(DefaultTableModel) this.jTAsigActuales.getModel();
+            int filas=this.jTAsigActuales.getRowCount();
+            for (int i = 0;filas>i; i++) {
+                modelo.removeRow(0);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al limpiar la tabla.");
+        }
+    }
+    
+    public void limpiarTablaCursadas(){
+        try {
+            DefaultTableModel modelo=(DefaultTableModel) this.jTAsigCursadas.getModel();
+            int filas=this.jTAsigCursadas.getRowCount();
+            for (int i = 0;filas>i; i++) {
+                modelo.removeRow(0);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al limpiar la tabla.");
+        }
+    }
+    
+    
+    
+    
     // rellenar tabla asignaturas cursadas
     public void rellenar_tabla1(){
     String usuarioID = Login.usuario;
@@ -324,6 +353,7 @@ public class EstudianteAsignaturas extends javax.swing.JFrame {
         System.out.println("qwe");
         String usuarioID = Login.usuario;
         System.out.println("qwe");
+        this.limpiarTablaActuales();
         try{
             Class.forName("com.mysql.jdbc.Driver");
             Connection conexion = DriverManager.getConnection(server,user,password);

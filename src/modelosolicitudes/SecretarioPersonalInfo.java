@@ -37,6 +37,55 @@ public class SecretarioPersonalInfo extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     
+    
+    public void actualizarInfo(
+            Object nombreIn,
+            Object apellidoIn,
+            Object documentoIn,
+            Object correoIn,
+            Object contraseñaIn,
+            Object telefonoIn){
+    int usuarioID = Login.idUsuario;
+        try{
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection conexion = DriverManager.getConnection(server,user,password);
+            
+            // procedimiento Almacenado de update
+            //?: nombre, apellido, documento,correo,contraseña,telefono
+            String sql = "CALL proc_update_info_personal(?,?,?,?,?,?,?)" ;
+            CallableStatement st = conexion.prepareCall(sql);
+            st.setObject(1, nombreIn);
+            st.setObject(2, apellidoIn);
+            st.setObject(3, documentoIn);
+            st.setObject(4, correoIn);
+            st.setObject(5, contraseñaIn);
+            st.setObject(6, telefonoIn);
+            st.setInt(7, usuarioID);
+            st.execute();
+
+            System.out.println("Datos agregados a la tabla 2");
+            //conexion.close();
+            
+            this.rellenar_tabla2Secretario();
+            
+        }catch(Exception e){
+            System.out.println(e.getMessage()+ "No se pudo hacer la coneccion");
+        }
+    }
+    
+    
+    public void limpiarTabla(){
+        try {
+            DefaultTableModel modelo=(DefaultTableModel) this.jTInformacionSec.getModel();
+            int filas=this.jTInformacionSec.getRowCount();
+            for (int i = 0;filas>i; i++) {
+                modelo.removeRow(0);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al limpiar la tabla.");
+        }
+    }
+    
     public void rellenar_tabla2Secretario(){
     int usuarioID = Login.idUsuario;
         try{
@@ -49,7 +98,7 @@ public class SecretarioPersonalInfo extends javax.swing.JFrame {
             st.setInt(1, usuarioID);
             st.execute();
             ResultSet rs = st.getResultSet();
-            
+            this.limpiarTabla();
             
             while (rs.next()) {   
                 //Datos se agregaran hasta que finalice
@@ -104,7 +153,7 @@ public class SecretarioPersonalInfo extends javax.swing.JFrame {
         jBUpdateContraseña = new javax.swing.JButton();
         jTFUpdateContraseña = new javax.swing.JTextField();
         jBUpdateCorreo = new javax.swing.JButton();
-        jTextField6 = new javax.swing.JTextField();
+        jTFUpdateCorreo = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -259,7 +308,7 @@ public class SecretarioPersonalInfo extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(jTFUpdateContraseña)
-                                    .addComponent(jTextField6)
+                                    .addComponent(jTFUpdateCorreo)
                                     .addComponent(jTFUpdateTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
@@ -298,7 +347,7 @@ public class SecretarioPersonalInfo extends javax.swing.JFrame {
                             .addComponent(jBUpdateDocumento)
                             .addComponent(jTFUpdateDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jBUpdateCorreo)
-                            .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jTFUpdateCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addComponent(jBRegresar)
                 .addGap(19, 19, 19))
@@ -326,6 +375,9 @@ public class SecretarioPersonalInfo extends javax.swing.JFrame {
 
     private void jBUpdateNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBUpdateNombreActionPerformed
         // TODO add your handling code here:
+        String nombre = this.jTFUpdateNombre.getText();
+        actualizarInfo(nombre,null,null,null,null,null);//nombre, apellido, documento,correo,contraseña,telefono
+        this.jTFUpdateNombre.setText("");//se limpia el campo de texto
     }//GEN-LAST:event_jBUpdateNombreActionPerformed
 
     private void jBInformacionBasicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBInformacionBasicaActionPerformed
@@ -334,22 +386,37 @@ public class SecretarioPersonalInfo extends javax.swing.JFrame {
 
     private void jBUpdateApellidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBUpdateApellidosActionPerformed
         // TODO add your handling code here:
+        String apellido = this.jTFUpdateApellidos.getText();//recolección del campo de texto
+        actualizarInfo(null,apellido,null,null,null,null);//nombre, apellido, documento,correo,contraseña,telefono
+        this.jTFUpdateApellidos.setText("");//se limpia el campo de texto
     }//GEN-LAST:event_jBUpdateApellidosActionPerformed
 
     private void jBUpdateDocumentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBUpdateDocumentoActionPerformed
         // TODO add your handling code here:
+        int documento = Integer.parseInt (this.jTFUpdateDocumento.getText());
+        actualizarInfo(null,null,documento,null,null,null);//nombre, apellido, documento,correo,contraseña,telefono
+        this.jTFUpdateDocumento.setText("");//se limpia el campo de texto
     }//GEN-LAST:event_jBUpdateDocumentoActionPerformed
 
     private void jBUpdateTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBUpdateTelefonoActionPerformed
         // TODO add your handling code here:
+        int telefono = Integer.parseInt(this.jTFUpdateTelefono.getText());
+        actualizarInfo(null,null,null,null,null,telefono);//nombre, apellido, documento,correo,contraseña,telefono
+        this.jTFUpdateTelefono.setText("");//se limpia el campo de texto
     }//GEN-LAST:event_jBUpdateTelefonoActionPerformed
 
     private void jBUpdateContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBUpdateContraseñaActionPerformed
         // TODO add your handling code here:
+        String contraseña = this.jTFUpdateContraseña.getText();
+        actualizarInfo(null,null,null,null,contraseña,null);//nombre, apellido, documento,correo,contraseña,telefono
+        this.jTFUpdateContraseña.setText("");//se limpia el campo de texto
     }//GEN-LAST:event_jBUpdateContraseñaActionPerformed
 
     private void jBUpdateCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBUpdateCorreoActionPerformed
         // TODO add your handling code here:
+        String correo = this.jTFUpdateCorreo.getText();
+        actualizarInfo(null,null,null,correo,null,null);//nombre, apellido, documento,correo,contraseña,telefono
+        this.jTFUpdateCorreo.setText("");//se limpia el campo de texto
     }//GEN-LAST:event_jBUpdateCorreoActionPerformed
 
     private void jBSolicitudesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSolicitudesActionPerformed
@@ -535,10 +602,10 @@ public class SecretarioPersonalInfo extends javax.swing.JFrame {
     private javax.swing.JScrollPane jSPInformacion;
     private javax.swing.JTextField jTFUpdateApellidos;
     private javax.swing.JTextField jTFUpdateContraseña;
+    private javax.swing.JTextField jTFUpdateCorreo;
     private javax.swing.JTextField jTFUpdateDocumento;
     private javax.swing.JTextField jTFUpdateNombre;
     private javax.swing.JTextField jTFUpdateTelefono;
     private javax.swing.JTable jTInformacionSec;
-    private javax.swing.JTextField jTextField6;
     // End of variables declaration//GEN-END:variables
 }

@@ -300,7 +300,7 @@ public class EstudiantePersonalInfo extends javax.swing.JFrame {
             st.setObject(6, telefonoIn);
             st.setInt(7, usuarioID);
             st.execute();
-   
+
             System.out.println("Datos agregados a la tabla 2");
             //conexion.close();
             
