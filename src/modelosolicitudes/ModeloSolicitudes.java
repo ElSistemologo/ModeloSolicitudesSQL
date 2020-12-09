@@ -18,7 +18,7 @@ public class ModeloSolicitudes {
     public static Connection conexion;
     public static String bd="modelosolicitudes";
     public static String user="root";
-    public static String password="santiago1234";
+    public static String password="4564LoLPC";
     public static String host="localhost";
     public static String server="jdbc:mysql://"+host+"/"+bd+"?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
         /**

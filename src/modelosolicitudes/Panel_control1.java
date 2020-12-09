@@ -102,14 +102,15 @@ public class Panel_control1 extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, Cargo_User );
         System.out.println(Cargo_User);
         if( Cargo_User.equals("secretario") == true ){
-            JOptionPane.showMessageDialog(null, Cargo_User + "YEY" );
+            
             System.out.println("cargo" + Cargo_User);
             SecretarioSol sec1 = new SecretarioSol();
             sec1.setVisible(true);
+            sec1.rellenar_tabla1Secretario();
             this.dispose();
         
         } else if (Cargo_User.equals("estudiante") == true){
-            JOptionPane.showMessageDialog(null, Cargo_User + "YEY" );
+            
             System.out.println("cargo" + Cargo_User);
             EstudianteAsignaturas est1 = new EstudianteAsignaturas();
             est1.setVisible(true);

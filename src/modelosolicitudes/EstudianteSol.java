@@ -367,10 +367,10 @@ public class EstudianteSol extends javax.swing.JFrame {
                 
             }
             
-            System.out.println("Datos agregados a la tabla 2");
+            System.out.println("Datos agregados a la tabla 2 Estudiante");
             //conexion.close();
         }catch(Exception e){
-            System.out.println(e.getMessage()+ "No se pudo hacer la coneccion");
+            System.out.println(e.getMessage()+ " No se pudo hacer la conexion");
         }
     }
     
@@ -408,10 +408,10 @@ public class EstudianteSol extends javax.swing.JFrame {
                 
             }
             
-            System.out.println("Datos agregados a la tabla 1");
+            System.out.println("Datos agregados a la tabla 1 Estudiante");
             //conexion.close();
         }catch(Exception e){
-            System.out.println(e.getMessage()+ "No se pudo hacer la coneccion");
+            System.out.println(e.getMessage()+ "No se pudo hacer la conexion");
         }
     }      
     
