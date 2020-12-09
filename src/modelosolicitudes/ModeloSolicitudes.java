@@ -172,6 +172,37 @@ public class ModeloSolicitudes {
 
         return resultado ;
     }
+     
+     public static int GETIdUsuario(String Usuario ){
+        int resultado = 0;
+
+        try {
+            String SQL_call = "{call PA_GET_IDusuario(?,?)}";
+            //Statement s = conexion.createStatement();
+            conexion = DriverManager.getConnection(server,user,password);
+            CallableStatement cstmt = conexion.prepareCall(SQL_call); 
+            cstmt.setString(1 ,Usuario );
+          
+            cstmt.registerOutParameter(2, Types.INTEGER);
+            cstmt.execute(); 
+            resultado = cstmt.getInt(2);
+
+            //ResultSet procObr = s.executeQuery ("CAll PA_obra (300,1000,@CantActualizacion_obras)");
+            System.out.println("Ejecutando procedimiento " + cstmt );
+            System.out.println("Procedimiento Almacenado ejecutado con éxito  ..... OK");     
+
+            return resultado ;
+        } catch (SQLException ex) {
+            System.out.println("Imposible realizar procedimento almacenado ... FAIL");
+
+            }
+
+
+        return resultado ;
+    }
+     
+     
+     
     
     //METODO PARA COMPROBAR CARGO DE USUARIOS    
     public static String CargoUsuario(String Usuario ){
