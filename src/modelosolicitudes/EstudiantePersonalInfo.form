@@ -83,7 +83,7 @@
                                   <EmptySpace max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                       <Component id="jTFUpdateContraseña" max="32767" attributes="0"/>
-                                      <Component id="jTextField6" max="32767" attributes="0"/>
+                                      <Component id="jTFUpdateCorreo" max="32767" attributes="0"/>
                                       <Component id="jTFUpdateTelefono" min="-2" pref="120" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
@@ -125,7 +125,7 @@
                               <Component id="jBUpdateDocumento" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jTFUpdateDocumento" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jBUpdateCorreo" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jTextField6" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jTFUpdateCorreo" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jBAsignaturas" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -344,7 +344,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBUpdateCorreoActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField6">
+        <Component class="javax.swing.JTextField" name="jTFUpdateCorreo">
         </Component>
       </SubComponents>
     </Container>
