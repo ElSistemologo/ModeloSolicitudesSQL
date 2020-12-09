@@ -13,6 +13,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import static modelosolicitudes.Login.usuario;
 import static modelosolicitudes.ModeloSolicitudes.password;
 import static modelosolicitudes.ModeloSolicitudes.server;
 import static modelosolicitudes.ModeloSolicitudes.user;
@@ -255,6 +256,26 @@ public class EstudianteDel extends javax.swing.JFrame {
         }
     }
     
+    public void borrarSolicitud(){
+    int id_solicitud = jTSolNAprobadas.getInt();
+        try{
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection conexion = DriverManager.getConnection(server,user,password);
+            
+            String sql = "CALL proc_borrar_solicitud(?)" ;
+            CallableStatement st = conexion.prepareCall(sql);
+            st.setS(1, id_solicitud);
+            st.execute();
+   
+            System.out.println("Datos eliminados");
+            this.rellenar_tabla1();
+            this.jTSolNAprobadas.setText("");
+            
+        }catch(Exception e){
+            System.out.println(e.getMessage()+ "No se pudo hacer la coneccion");
+        }
+    }
+    
     private void jTSolNAprobadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTSolNAprobadasActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTSolNAprobadasActionPerformed
@@ -282,7 +303,7 @@ public class EstudianteDel extends javax.swing.JFrame {
     }//GEN-LAST:event_jBRegresarActionPerformed
 
     private void jBSolNAprobadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSolNAprobadasActionPerformed
-        // TODO add your handling code here:
+        borrarSolicitud();
     }//GEN-LAST:event_jBSolNAprobadasActionPerformed
 
     private void jBSolicitudesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSolicitudesActionPerformed
