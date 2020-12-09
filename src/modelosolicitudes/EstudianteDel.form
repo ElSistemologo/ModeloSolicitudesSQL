@@ -178,6 +178,8 @@
                               <Component id="jTSolNAprobadas" min="-2" pref="115" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="jBSolNAprobadas" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="jBSolNAprobadas1" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
@@ -195,6 +197,7 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jTSolNAprobadas" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jBSolNAprobadas" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jBSolNAprobadas1" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                   </Group>
@@ -270,6 +273,14 @@
             <Component class="javax.swing.JTextField" name="jTSolNAprobadas">
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTSolNAprobadasActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="jBSolNAprobadas1">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Justificaci&#xf3;n"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBSolNAprobadas1ActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>

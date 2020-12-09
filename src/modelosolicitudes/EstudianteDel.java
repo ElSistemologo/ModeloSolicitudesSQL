@@ -11,9 +11,13 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Types;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import static modelosolicitudes.Login.usuario;
+import static modelosolicitudes.ModeloSolicitudes.conexion;
 import static modelosolicitudes.ModeloSolicitudes.password;
 import static modelosolicitudes.ModeloSolicitudes.server;
 import static modelosolicitudes.ModeloSolicitudes.user;
@@ -51,6 +55,7 @@ public class EstudianteDel extends javax.swing.JFrame {
         jBSolNAprobadas = new javax.swing.JButton();
         jLSolNAprobadas = new javax.swing.JLabel();
         jTSolNAprobadas = new javax.swing.JTextField();
+        jBSolNAprobadas1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -132,6 +137,13 @@ public class EstudianteDel extends javax.swing.JFrame {
             }
         });
 
+        jBSolNAprobadas1.setText("Justificación");
+        jBSolNAprobadas1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBSolNAprobadas1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPSolNAprobadasLayout = new javax.swing.GroupLayout(jPSolNAprobadas);
         jPSolNAprobadas.setLayout(jPSolNAprobadasLayout);
         jPSolNAprobadasLayout.setHorizontalGroup(
@@ -147,7 +159,9 @@ public class EstudianteDel extends javax.swing.JFrame {
                     .addGroup(jPSolNAprobadasLayout.createSequentialGroup()
                         .addComponent(jTSolNAprobadas, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jBSolNAprobadas)))
+                        .addComponent(jBSolNAprobadas)
+                        .addGap(18, 18, 18)
+                        .addComponent(jBSolNAprobadas1)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPSolNAprobadasLayout.setVerticalGroup(
@@ -160,7 +174,8 @@ public class EstudianteDel extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPSolNAprobadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTSolNAprobadas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBSolNAprobadas))
+                    .addComponent(jBSolNAprobadas)
+                    .addComponent(jBSolNAprobadas1))
                 .addGap(34, 34, 34))
         );
 
@@ -214,8 +229,77 @@ public class EstudianteDel extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+        
     
+    private String selectTipo (int id_sol ){
+        String resultado = "";
+        int usuarioID = Login.idUsuario;
+        
+        try {
+            String SQL_call = "{CALL PA_select_tipo_est(?,?,?)}";
+            //Statement s = conexion.createStatement();
+            conexion = DriverManager.getConnection(server,user,password);
+            CallableStatement cstmt = conexion.prepareCall(SQL_call); 
+            cstmt.setInt(1 ,id_sol );
+            cstmt.setInt(2 ,usuarioID );
+            cstmt.registerOutParameter(3, Types.VARCHAR);
+            cstmt.execute(); 
+            resultado = cstmt.getString(3);
+
+            //ResultSet procObr = s.executeQuery ("CAll PA_obra (300,1000,@CantActualizacion_obras)");
+            System.out.println("Ejecutando procedimiento " + cstmt );
+            System.out.println("Procedimiento Almacenado ejecutado con éxito  ..... OK");     
+            System.out.println(resultado);
+            return resultado ;
+        } catch (SQLException ex) {
+            System.out.println("Imposible realizar procedimento almacenado ... FAIL");
+
+            }
+
+
+        return resultado ;
+    }
     
+    private String selectComentarios (int id_sol ){
+        String resultado = "";
+        int usuarioID = Login.idUsuario;
+        try {
+            String SQL_call = "{CALL PA_select_comentarios_est(?,?,?)}";
+            //Statement s = conexion.createStatement();
+            conexion = DriverManager.getConnection(server,user,password);
+            CallableStatement cstmt = conexion.prepareCall(SQL_call); 
+            cstmt.setInt(1 ,id_sol );
+            cstmt.setInt(2, usuarioID);
+            cstmt.registerOutParameter(3, Types.VARCHAR);
+            cstmt.execute(); 
+            resultado = cstmt.getString(3);
+
+            //ResultSet procObr = s.executeQuery ("CAll PA_obra (300,1000,@CantActualizacion_obras)");
+            System.out.println("Ejecutando procedimiento " + cstmt );
+            System.out.println("Procedimiento Almacenado ejecutado con éxito  ..... OK");     
+            System.out.println(resultado);
+            return resultado ;
+        } catch (SQLException ex) {
+            System.out.println("Imposible realizar procedimento almacenado ... FAIL");
+
+            }
+
+
+        return resultado ;
+    }
+        public static void limpiarTabla(JTable tabla){
+        try {
+            DefaultTableModel modelo=(DefaultTableModel) tabla.getModel();
+            int filas= tabla.getRowCount();
+            for (int i = 0;filas>i; i++) {
+                modelo.removeRow(0);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al limpiar la tabla.");
+        }
+    }
+        
+        
     public void rellenar_tabla1(){
     String usuarioID = Login.usuario;
         try{
@@ -255,27 +339,41 @@ public class EstudianteDel extends javax.swing.JFrame {
             System.out.println(e.getMessage()+ "No se pudo hacer la coneccion");
         }
     }
-    /*
-    public void borrarSolicitud(){
-    int id_solicitud = jTSolNAprobadas.getInt();
+    
+    private String  borrarSolicitud(){
+    int id_solicitud = Integer.parseInt(jTSolNAprobadas.getText());
+    String resultado = "";
+    int usuarioID = Login.idUsuario;
         try{
             Class.forName("com.mysql.jdbc.Driver");
             Connection conexion = DriverManager.getConnection(server,user,password);
             
-            String sql = "CALL proc_borrar_solicitud(?)" ;
+            String sql = "CALL proc_borrar_solicitud(?,?,?)" ;
             CallableStatement st = conexion.prepareCall(sql);
-            st.setString(1, id_solicitud);
+            st.setInt(1, id_solicitud);
+            st.setInt(2, usuarioID);
+            st.registerOutParameter(3, Types.VARCHAR);
+            st.execute(); 
+            resultado = st.getString(3);
             st.execute();
    
             System.out.println("Datos eliminados");
+            this.limpiarTabla(jTTSolNAprobadas);
             this.rellenar_tabla1();
             this.jTSolNAprobadas.setText("");
             
+            System.out.println(resultado);
+            //JOptionPane.showMessageDialog(null,resultado );
+            return resultado;
+            
+            
+            
         }catch(Exception e){
             System.out.println(e.getMessage()+ "No se pudo hacer la coneccion");
+            return "No se pudo hacer la conexion";
         }
     }
-    */
+    
     private void jTSolNAprobadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTSolNAprobadasActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTSolNAprobadasActionPerformed
@@ -303,7 +401,8 @@ public class EstudianteDel extends javax.swing.JFrame {
     }//GEN-LAST:event_jBRegresarActionPerformed
 
     private void jBSolNAprobadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSolNAprobadasActionPerformed
-        //borrarSolicitud();
+        String resultado = borrarSolicitud();
+        JOptionPane.showMessageDialog(null,resultado );
     }//GEN-LAST:event_jBSolNAprobadasActionPerformed
 
     private void jBSolicitudesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSolicitudesActionPerformed
@@ -313,6 +412,28 @@ public class EstudianteDel extends javax.swing.JFrame {
         est_sol.rellenar_tabla2();
         this.dispose(); 
     }//GEN-LAST:event_jBSolicitudesActionPerformed
+
+    private void jBSolNAprobadas1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSolNAprobadas1ActionPerformed
+        // TODO add your handling code here:
+        int com_numero = Integer.parseInt( this.jTSolNAprobadas.getText());
+        String comentarios = this.selectComentarios(com_numero);// se guardan los comentarios
+        System.out.println(comentarios);
+        String tipo = this.selectTipo(com_numero);// se guarda el tipo
+        
+        
+        ComentarioSolicitud est_com = new ComentarioSolicitud(); //nueva ventana de Comentario de solicitudes
+        est_com.setVisible(true);
+        if(comentarios != "Usted no ha hecho ninguna solicitud con ese número"){
+            est_com.set_tipo(tipo);// se actualiza el tipo
+        }
+        
+        est_com.set_textArea(comentarios);// se actualiza el comentario
+        
+        //this.dispose();
+        
+        
+        
+    }//GEN-LAST:event_jBSolNAprobadas1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -417,6 +538,7 @@ public class EstudianteDel extends javax.swing.JFrame {
     private javax.swing.JButton jBInformacionBasica;
     private javax.swing.JButton jBRegresar;
     private javax.swing.JButton jBSolNAprobadas;
+    private javax.swing.JButton jBSolNAprobadas1;
     private javax.swing.JButton jBSolicitudes;
     private javax.swing.JLabel jLSolNAprobadas;
     private javax.swing.JPanel jPSolNAprobadas;
