@@ -343,6 +343,43 @@ public class EstudianteSol extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void rellenar_tabla1(){
+    int usuarioID = Login.idUsuario;
+        try{
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection conexion = DriverManager.getConnection(server,user,password);
+            
+            Statement st =  conexion.createStatement();
+            String sql = "SELECT sol_id, Nombre_Secretario, sol_Fecha, tip_tipo, estSol_nombre FROM vw_SolicitudesTodasEst where per_id_Estudiante ="+ usuarioID ;
+            ResultSet rs = st.executeQuery(sql);
+            
+            while (rs.next()) {   
+                //Datos se agregaran hasta que finalice
+                String NumeroSolicitud = String.valueOf(rs.getInt("sol_id"));
+                String Nombre_Secretario = String.valueOf(rs.getString("Nombre_Secretario"));
+                String Fecha_Solicitud = String.valueOf(rs.getDate("sol_Fecha"));
+                String Tipo_Solicitud = String.valueOf(rs.getString("tip_tipo"));
+                String Estado_Solicitud = String.valueOf(rs.getString("estSol_nombre"));
+                
+                //String Array para almacenar los datos en el Jtable
+                
+                String tbData[] = {NumeroSolicitud,Nombre_Secretario,Fecha_Solicitud,Tipo_Solicitud,Estado_Solicitud};
+                DefaultTableModel tblModel = (DefaultTableModel)jTSolNoAprobadas.getModel();
+                
+                //Finalmente se añade el lo contenido en el String Array al jtable
+                
+                tblModel.addRow(tbData);
+                
+            }
+            
+            System.out.println("Datos agregados a la tabla");
+            //conexion.close();
+        }catch(Exception e){
+            System.out.println(e.getMessage()+ "No se pudo hacer la coneccion");
+        }
+    }    
+    
+    
     private void jBRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRegresarActionPerformed
         Login est_log = new Login(); //nueva ventana inicial - volver a iniciar seción
         est_log.setVisible(true);
@@ -395,9 +432,11 @@ public class EstudianteSol extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jBSolAprobadasActionPerformed
 
+        
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         int usuarioID = Login.idUsuario;
+        System.out.println(usuarioID);
         try{
             Class.forName("com.mysql.jdbc.Driver");
             Connection conexion = DriverManager.getConnection(server,user,password);
