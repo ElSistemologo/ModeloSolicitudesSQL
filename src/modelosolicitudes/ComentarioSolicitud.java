@@ -31,8 +31,8 @@ public class ComentarioSolicitud extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jSPDescripcion = new javax.swing.JScrollPane();
         jTADescripcion = new javax.swing.JTextArea();
+        jLTipoTexto = new javax.swing.JLabel();
         jBRegresar = new javax.swing.JButton();
-        jLSolNAprobadas = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -70,16 +70,17 @@ public class ComentarioSolicitud extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jBRegresar.setText("Regresar");
+        jLTipoTexto.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLTipoTexto.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        jLTipoTexto.setText("Permiso Denegado");
+
+        jBRegresar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jBRegresar.setText("cerrar");
         jBRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBRegresarActionPerformed(evt);
             }
         });
-
-        jLSolNAprobadas.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLSolNAprobadas.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        jLSolNAprobadas.setText("Cancelación de asignaturas");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -89,18 +90,18 @@ public class ComentarioSolicitud extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                         .addComponent(jBRegresar))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLSolNAprobadas, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLTipoTexto, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLSolNAprobadas, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLTipoTexto, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -123,11 +124,25 @@ public class ComentarioSolicitud extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRegresarActionPerformed
-        EstudianteSol est_sol = new EstudianteSol(); // nueva ventana de solicitudes para estudiante
-        est_sol.setVisible(true);
-        this.dispose(); 
+        
+        this.dispose();
     }//GEN-LAST:event_jBRegresarActionPerformed
 
+    
+    
+    public void set_textArea (String texto){
+    
+    this.jTADescripcion.setText(texto);
+    
+    }
+    
+    public void set_tipo (String texto){
+    
+    this.jLTipoTexto.setText(texto);
+    
+    }
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -172,7 +187,7 @@ public class ComentarioSolicitud extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBRegresar;
-    private javax.swing.JLabel jLSolNAprobadas;
+    private javax.swing.JLabel jLTipoTexto;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jSPDescripcion;

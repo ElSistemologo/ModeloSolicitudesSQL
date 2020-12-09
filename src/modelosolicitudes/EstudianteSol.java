@@ -11,13 +11,16 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Types;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import static modelosolicitudes.Login.pass;
 import static modelosolicitudes.Login.usuario;
+import static modelosolicitudes.ModeloSolicitudes.conexion;
 import static modelosolicitudes.ModeloSolicitudes.password;
 import static modelosolicitudes.ModeloSolicitudes.server;
 import static modelosolicitudes.ModeloSolicitudes.user;
@@ -333,6 +336,72 @@ public class EstudianteSol extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
+    
+    
+    
+    private String selectTipo (int id_sol ){
+        String resultado = "";
+        int usuarioID = Login.idUsuario;
+        
+        try {
+            String SQL_call = "{CALL PA_select_tipo_est(?,?,?)}";
+            //Statement s = conexion.createStatement();
+            conexion = DriverManager.getConnection(server,user,password);
+            CallableStatement cstmt = conexion.prepareCall(SQL_call); 
+            cstmt.setInt(1 ,id_sol );
+            cstmt.setInt(2 ,usuarioID );
+            cstmt.registerOutParameter(3, Types.VARCHAR);
+            cstmt.execute(); 
+            resultado = cstmt.getString(3);
+
+            //ResultSet procObr = s.executeQuery ("CAll PA_obra (300,1000,@CantActualizacion_obras)");
+            System.out.println("Ejecutando procedimiento " + cstmt );
+            System.out.println("Procedimiento Almacenado ejecutado con éxito  ..... OK");     
+            System.out.println(resultado);
+            return resultado ;
+        } catch (SQLException ex) {
+            System.out.println("Imposible realizar procedimento almacenado ... FAIL");
+
+            }
+
+
+        return resultado ;
+    }
+    
+    private String selectComentarios (int id_sol ){
+        String resultado = "";
+        int usuarioID = Login.idUsuario;
+        try {
+            String SQL_call = "{CALL PA_select_comentarios_est(?,?,?)}";
+            //Statement s = conexion.createStatement();
+            conexion = DriverManager.getConnection(server,user,password);
+            CallableStatement cstmt = conexion.prepareCall(SQL_call); 
+            cstmt.setInt(1 ,id_sol );
+            cstmt.setInt(2, usuarioID);
+            cstmt.registerOutParameter(3, Types.VARCHAR);
+            cstmt.execute(); 
+            resultado = cstmt.getString(3);
+
+            //ResultSet procObr = s.executeQuery ("CAll PA_obra (300,1000,@CantActualizacion_obras)");
+            System.out.println("Ejecutando procedimiento " + cstmt );
+            System.out.println("Procedimiento Almacenado ejecutado con éxito  ..... OK");     
+            System.out.println(resultado);
+            return resultado ;
+        } catch (SQLException ex) {
+            System.out.println("Imposible realizar procedimento almacenado ... FAIL");
+
+            }
+
+
+        return resultado ;
+    }
+    
+    
+    
+    
+    
+    
+    
     public void rellenar_tabla2(){
     String usuarioID = Login.usuario;
         try{
@@ -461,16 +530,40 @@ public class EstudianteSol extends javax.swing.JFrame {
 
     private void jBSolNAprobadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSolNAprobadasActionPerformed
         // input (aún no se ha hecho): la justificación(string), tipo de solicitud(string)
+        int com_numero = Integer.parseInt( this.jTSolNAprobadas.getText());
+        String comentarios = this.selectComentarios(com_numero);
+        System.out.println(comentarios);
+        String tipo = this.selectTipo(com_numero);
+        
+        
         ComentarioSolicitud est_com = new ComentarioSolicitud(); //nueva ventana de Comentario de solicitudes
         est_com.setVisible(true);
-        this.dispose();
+        if(comentarios != "Usted no ha hecho ninguna solicitud con ese número"){
+            est_com.set_tipo(tipo);
+        }
+        
+        est_com.set_textArea(comentarios);
+        
+        //this.dispose();
     }//GEN-LAST:event_jBSolNAprobadasActionPerformed
 
     private void jBSolAprobadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSolAprobadasActionPerformed
         // input (aún no se ha hecho): la justificación(string), tipo de solicitud(string)
+         int com_numero = Integer.parseInt( this.jTFSolAprobadas.getText());
+        String comentarios = this.selectComentarios(com_numero);// se guardan los comentarios
+        System.out.println(comentarios);
+        String tipo = this.selectTipo(com_numero);// se guarda el tipo
+        
+        
         ComentarioSolicitud est_com = new ComentarioSolicitud(); //nueva ventana de Comentario de solicitudes
         est_com.setVisible(true);
-        this.dispose();
+        if(comentarios != "Usted no ha hecho ninguna solicitud con ese número"){
+            est_com.set_tipo(tipo);// se actualiza el tipo
+        }
+        
+        est_com.set_textArea(comentarios);// se actualiza el comentario
+        
+        //this.dispose();
     }//GEN-LAST:event_jBSolAprobadasActionPerformed
 
         
