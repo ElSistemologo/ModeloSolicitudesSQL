@@ -255,7 +255,7 @@ public class EstudianteDel extends javax.swing.JFrame {
             System.out.println(e.getMessage()+ "No se pudo hacer la coneccion");
         }
     }
-    
+    /*
     public void borrarSolicitud(){
     int id_solicitud = jTSolNAprobadas.getInt();
         try{
@@ -264,7 +264,7 @@ public class EstudianteDel extends javax.swing.JFrame {
             
             String sql = "CALL proc_borrar_solicitud(?)" ;
             CallableStatement st = conexion.prepareCall(sql);
-            st.setS(1, id_solicitud);
+            st.setString(1, id_solicitud);
             st.execute();
    
             System.out.println("Datos eliminados");
@@ -275,7 +275,7 @@ public class EstudianteDel extends javax.swing.JFrame {
             System.out.println(e.getMessage()+ "No se pudo hacer la coneccion");
         }
     }
-    
+    */
     private void jTSolNAprobadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTSolNAprobadasActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTSolNAprobadasActionPerformed
@@ -303,7 +303,7 @@ public class EstudianteDel extends javax.swing.JFrame {
     }//GEN-LAST:event_jBRegresarActionPerformed
 
     private void jBSolNAprobadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSolNAprobadasActionPerformed
-        borrarSolicitud();
+        //borrarSolicitud();
     }//GEN-LAST:event_jBSolNAprobadasActionPerformed
 
     private void jBSolicitudesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSolicitudesActionPerformed

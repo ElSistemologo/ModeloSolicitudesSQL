@@ -312,10 +312,10 @@ public class EstudiantePersonalInfo extends javax.swing.JFrame {
     }
     
     
-    public void limpiarTabla(){
+    public static void limpiarTabla(JTable tabla){
         try {
-            DefaultTableModel modelo=(DefaultTableModel) this.jTInformacion.getModel();
-            int filas=this.jTInformacion.getRowCount();
+            DefaultTableModel modelo=(DefaultTableModel) tabla.getModel();
+            int filas= tabla.getRowCount();
             for (int i = 0;filas>i; i++) {
                 modelo.removeRow(0);
             }
@@ -337,7 +337,7 @@ public class EstudiantePersonalInfo extends javax.swing.JFrame {
             st.setString(1, usuarioID);
             st.execute();
             ResultSet rs = st.getResultSet();
-            this.limpiarTabla();
+            this.limpiarTabla(jTInformacion);
             
             while (rs.next()) {   
                 //Datos se agregaran hasta que finalice
