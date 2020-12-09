@@ -261,8 +261,9 @@ public class EstudianteDel extends javax.swing.JFrame {
 
     private void jBAsignaturasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAsignaturasActionPerformed
         EstudianteAsignaturas est_asig = new EstudianteAsignaturas(); //nueva ventana de asignaturas
-        est_asig.setVisible(true);
         est_asig.rellenar_tabla2();
+        est_asig.setVisible(true);
+        
         est_asig.rellenar_tabla1();
         this.dispose();
     }//GEN-LAST:event_jBAsignaturasActionPerformed

@@ -321,18 +321,20 @@ public class EstudianteAsignaturas extends javax.swing.JFrame {
     
     // rellena tabla de asignaturas acuales
     public void rellenar_tabla2(){
-    String usuarioID = Login.usuario;
+        System.out.println("qwe");
+        String usuarioID = Login.usuario;
+        System.out.println("qwe");
         try{
             Class.forName("com.mysql.jdbc.Driver");
             Connection conexion = DriverManager.getConnection(server,user,password);
             
             // Statement st =  conexion.createStatement();
-            String sql = "CALL proc_est_materias_actuales()" ;
+            String sql = "CALL proc_est_materias_actuales(?)" ;
             CallableStatement st = conexion.prepareCall(sql);
             st.setString(1, usuarioID);
             st.execute();
             ResultSet rs = st.getResultSet();
-            
+            System.out.println("jkl");
             
             while (rs.next()) {   
                 //Datos se agregaran hasta que finalice
@@ -341,7 +343,7 @@ public class EstudianteAsignaturas extends javax.swing.JFrame {
                 String nombre_profesor = String.valueOf(rs.getString("Nombre_Profesor"));
                 String horario = String.valueOf(rs.getString("Horario"));
                 String salon = String.valueOf(rs.getString("Salon"));
-                
+                System.out.println("iop");
                 //String Array para almacenar los datos en el Jtable
                 
                 String tbData[] = {asignatura,grupo,nombre_profesor,horario,salon};
