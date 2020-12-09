@@ -216,7 +216,8 @@ public class ModeloSolicitudes {
     /**
      * @param args the command line arguments
      */
-       
+            Login inicioApp = new Login();
+            inicioApp.setVisible(true);
         
         //System.out.println("-->"+InicioSesion("hol1","hol11234"));
         getTableSQL("SELECT sol_id, Nombre_Secretario,  sol_Fecha, tip_tipo, estSol_nombre FROM vw_SolicitudesTodasEst");
