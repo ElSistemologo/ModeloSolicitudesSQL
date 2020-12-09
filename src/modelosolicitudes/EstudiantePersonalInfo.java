@@ -7,7 +7,15 @@ package modelosolicitudes;
  */
 
 
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import static modelosolicitudes.ModeloSolicitudes.password;
+import static modelosolicitudes.ModeloSolicitudes.server;
+import static modelosolicitudes.ModeloSolicitudes.user;
 
 /**
  *
@@ -65,7 +73,7 @@ public class EstudiantePersonalInfo extends javax.swing.JFrame {
             }
         });
 
-        jBInformacionBasica.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jBInformacionBasica.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jBInformacionBasica.setText("Información Basica");
         jBInformacionBasica.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jBInformacionBasica.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
@@ -108,10 +116,10 @@ public class EstudiantePersonalInfo extends javax.swing.JFrame {
 
         jTInformacion.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null}
+
             },
             new String [] {
-                "Nombre", "Apellidos", "Documento", "Teléfono", "Contraseña", "Carrera", "Username", "Correo"
+                "Nombre", "Apellidos", "Documento", "Teléfono", "Contraseña", "Correo", "Carrera", "Username"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -187,7 +195,7 @@ public class EstudiantePersonalInfo extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jBInformacionBasica, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jBAsignaturas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jBSolicitudes, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jBSolicitudes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(79, 79, 79)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -264,7 +272,50 @@ public class EstudiantePersonalInfo extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    public void rellenar_tabla1(){
+    String usuarioID = Login.usuario;
+        try{
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection conexion = DriverManager.getConnection(server,user,password);
+            
+            // Statement st =  conexion.createStatement();
+            String sql = "CALL proc_est_info_basica(?)" ;
+            CallableStatement st = conexion.prepareCall(sql);
+            st.setString(1, usuarioID);
+            st.execute();
+            ResultSet rs = st.getResultSet();
+            
+            
+            while (rs.next()) {   
+                //Datos se agregaran hasta que finalice
+                String nombre = String.valueOf(rs.getString("Nombre"));
+                String apellidos = String.valueOf(rs.getString("Apellidos"));
+                String documento = String.valueOf(rs.getInt("Documento"));
+                String telefono = String.valueOf(rs.getInt("Telefono"));
+                String contraseña = String.valueOf(rs.getString("Contraseña"));
+                String correo = String.valueOf(rs.getString("Correo"));
+                String carrera = String.valueOf(rs.getString("Carrera"));
+                String nombre_usuario = String.valueOf(rs.getString("per_username"));
+                
+                //String Array para almacenar los datos en el Jtable
+                
+                String tbData[] = {nombre, apellidos, documento, telefono,contraseña, correo, carrera, nombre_usuario};
+                DefaultTableModel tblModel = (DefaultTableModel)jTInformacion.getModel();
+                System.err.println(nombre_usuario);
+                //Finalmente se añade el lo contenido en el String Array al jtable
+                
+                tblModel.addRow(tbData);
+                
+            }
+            
+            System.out.println("Datos agregados a la tabla 1 " );
+            //conexion.close();
+        }catch(Exception e){
+            System.out.println(e.getMessage()+ "No se pudo hacer la coneccion");
+        }
+    }
+    
     private void jBRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRegresarActionPerformed
         Login est_log = new Login(); //nueva ventana inicial - volver a iniciar seción
         est_log.setVisible(true);
@@ -275,6 +326,8 @@ public class EstudiantePersonalInfo extends javax.swing.JFrame {
     private void jBAsignaturasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAsignaturasActionPerformed
         EstudianteAsignaturas est_asig = new EstudianteAsignaturas(); //nueva ventana de asignaturas
         est_asig.setVisible(true);
+        est_asig.rellenar_tabla2();
+        est_asig.rellenar_tabla1();
         this.dispose();
     }//GEN-LAST:event_jBAsignaturasActionPerformed
 
@@ -310,6 +363,7 @@ public class EstudiantePersonalInfo extends javax.swing.JFrame {
         EstudianteSol est_sol = new EstudianteSol(); // nueva ventana de solicitudes para estudiante
         est_sol.setVisible(true);
         est_sol.rellenar_tabla1();
+        est_sol.rellenar_tabla2();
         this.dispose();        
     }//GEN-LAST:event_jBSolicitudesActionPerformed
 

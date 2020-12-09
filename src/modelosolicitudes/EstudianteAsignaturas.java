@@ -7,7 +7,15 @@ package modelosolicitudes;
  */
 
 
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import static modelosolicitudes.ModeloSolicitudes.password;
+import static modelosolicitudes.ModeloSolicitudes.server;
+import static modelosolicitudes.ModeloSolicitudes.user;
 
 /**
  *
@@ -143,8 +151,7 @@ public class EstudianteAsignaturas extends javax.swing.JFrame {
 
         jTAsigActuales.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "Asignatura", "Grupo", "Profesor", "Horario", "Salón"
@@ -182,8 +189,7 @@ public class EstudianteAsignaturas extends javax.swing.JFrame {
 
         jTAsigCursadas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "Asignatura", "Grupo", "Profesor", "Fecha", "Calificación"
@@ -271,7 +277,91 @@ public class EstudianteAsignaturas extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    // rellenar tabla asignaturas cursadas
+    public void rellenar_tabla1(){
+    String usuarioID = Login.usuario;
+        try{
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection conexion = DriverManager.getConnection(server,user,password);
+            
+            // Statement st =  conexion.createStatement();
+            String sql = "CALL proc_est_materias_vistas(?)" ;
+            CallableStatement st = conexion.prepareCall(sql);
+            st.setString(1, usuarioID);
+            st.execute();
+            ResultSet rs = st.getResultSet();
+            
+            
+            while (rs.next()) {   
+                //Datos se agregaran hasta que finalice
+                String asignatura = String.valueOf(rs.getString("Asignatura"));
+                String grupo = String.valueOf(rs.getInt("Grupo"));
+                String nombre_profesor = String.valueOf(rs.getString("Nombre_Profesor"));
+                String ins_AñoSemestre = String.valueOf(rs.getString("ins_AñoSemestre"));
+                String calificacion = String.valueOf(rs.getInt("Calificacion"));
+                
+                //String Array para almacenar los datos en el Jtable
+                
+                String tbData[] = {asignatura,grupo,nombre_profesor,ins_AñoSemestre,calificacion};
+                DefaultTableModel tblModel = (DefaultTableModel)jTAsigCursadas.getModel();
+                System.err.println(asignatura);
+                //Finalmente se añade el lo contenido en el String Array al jtable
+                
+                tblModel.addRow(tbData);
+                
+            }
+            
+            System.out.println("Datos agregados a la tabla 1 " );
+            //conexion.close();
+        }catch(Exception e){
+            System.out.println(e.getMessage()+ "No se pudo hacer la coneccion");
+        }
+    }
+    
+    // rellena tabla de asignaturas acuales
+    public void rellenar_tabla2(){
+    String usuarioID = Login.usuario;
+        try{
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection conexion = DriverManager.getConnection(server,user,password);
+            
+            // Statement st =  conexion.createStatement();
+            String sql = "CALL proc_est_materias_actuales()" ;
+            CallableStatement st = conexion.prepareCall(sql);
+            st.setString(1, usuarioID);
+            st.execute();
+            ResultSet rs = st.getResultSet();
+            
+            
+            while (rs.next()) {   
+                //Datos se agregaran hasta que finalice
+                String asignatura = String.valueOf(rs.getString("Asignatura"));
+                String grupo = String.valueOf(rs.getInt("Grupo"));
+                String nombre_profesor = String.valueOf(rs.getString("Nombre_Profesor"));
+                String horario = String.valueOf(rs.getString("Horario"));
+                String salon = String.valueOf(rs.getString("Salon"));
+                
+                //String Array para almacenar los datos en el Jtable
+                
+                String tbData[] = {asignatura,grupo,nombre_profesor,horario,salon};
+                DefaultTableModel tblModel = (DefaultTableModel)jTAsigActuales.getModel();
+                System.err.println(horario);
+                //Finalmente se añade el lo contenido en el String Array al jtable
+                
+                tblModel.addRow(tbData);
+                
+            }
+            
+            System.out.println("Datos agregados a la tabla 2 " );
+            //conexion.close();
+        }catch(Exception e){
+            System.out.println(e.getMessage()+ "No se pudo hacer la coneccion");
+        }
+    }
+    
+    
+    
     private void jBRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRegresarActionPerformed
         Login est_log = new Login(); //nueva ventana inicial - volver a iniciar seción
         est_log.setVisible(true);
@@ -286,6 +376,7 @@ public class EstudianteAsignaturas extends javax.swing.JFrame {
     private void jBInformacionBasicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBInformacionBasicaActionPerformed
         EstudiantePersonalInfo est_info = new EstudiantePersonalInfo(); //nueva ventana de información personal
         est_info.setVisible(true);
+        est_info.rellenar_tabla1();
         this.dispose();
     }//GEN-LAST:event_jBInformacionBasicaActionPerformed
 
@@ -293,6 +384,7 @@ public class EstudianteAsignaturas extends javax.swing.JFrame {
         EstudianteSol est_sol = new EstudianteSol(); // nueva ventana de solicitudes para estudiante
         est_sol.setVisible(true);
         est_sol.rellenar_tabla1();
+        est_sol.rellenar_tabla2();
         this.dispose();
     }//GEN-LAST:event_jBSolicitudesActionPerformed
 

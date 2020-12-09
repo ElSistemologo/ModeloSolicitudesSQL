@@ -7,7 +7,15 @@ package modelosolicitudes;
  */
 
 
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import static modelosolicitudes.ModeloSolicitudes.password;
+import static modelosolicitudes.ModeloSolicitudes.server;
+import static modelosolicitudes.ModeloSolicitudes.user;
 
 /**
  *
@@ -91,29 +99,7 @@ public class EstudianteDel extends javax.swing.JFrame {
 
         jTTSolNAprobadas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "Número", "Nombre del Secretario", "Fecha de recepción", "Tipo de solicitud", "Estado de la solicitud"
@@ -166,9 +152,9 @@ public class EstudianteDel extends javax.swing.JFrame {
         jPSolNAprobadasLayout.setVerticalGroup(
             jPSolNAprobadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPSolNAprobadasLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(23, 23, 23)
                 .addComponent(jSPSolNAprobadas, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLSolNAprobadas, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPSolNAprobadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -227,7 +213,48 @@ public class EstudianteDel extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    
+    public void rellenar_tabla1(){
+    String usuarioID = Login.usuario;
+        try{
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection conexion = DriverManager.getConnection(server,user,password);
+            
+            // Statement st =  conexion.createStatement();
+            String sql = "CALL proc_est_solicitudes_para_borrar(?)" ;
+            CallableStatement st = conexion.prepareCall(sql);
+            st.setString(1, usuarioID);
+            st.execute();
+            ResultSet rs = st.getResultSet();
+            
+            
+            while (rs.next()) {   
+                //Datos se agregaran hasta que finalice
+                String NumeroSolicitud = String.valueOf(rs.getInt("sol_id"));
+                String Nombre_Secretario = String.valueOf(rs.getString("Nombre_Secretario"));
+                String Fecha_Solicitud = String.valueOf(rs.getDate("Fecha_Recepcion"));
+                String Tipo_Solicitud = String.valueOf(rs.getString("TipoSolicitud"));
+                String Estado_Solicitud = String.valueOf(rs.getString("Estado"));
+                
+                //String Array para almacenar los datos en el Jtable
+                
+                String tbData[] = {NumeroSolicitud,Nombre_Secretario,Fecha_Solicitud,Tipo_Solicitud,Estado_Solicitud};
+                DefaultTableModel tblModel = (DefaultTableModel)jTTSolNAprobadas.getModel();
+                System.err.println(NumeroSolicitud);
+                //Finalmente se añade el lo contenido en el String Array al jtable
+                
+                tblModel.addRow(tbData);
+                
+            }
+            
+            System.out.println("Datos agregados a la tabla 1 " );
+            //conexion.close();
+        }catch(Exception e){
+            System.out.println(e.getMessage()+ "No se pudo hacer la coneccion");
+        }
+    }
+    
     private void jTSolNAprobadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTSolNAprobadasActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTSolNAprobadasActionPerformed
@@ -235,12 +262,15 @@ public class EstudianteDel extends javax.swing.JFrame {
     private void jBAsignaturasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAsignaturasActionPerformed
         EstudianteAsignaturas est_asig = new EstudianteAsignaturas(); //nueva ventana de asignaturas
         est_asig.setVisible(true);
+        est_asig.rellenar_tabla2();
+        est_asig.rellenar_tabla1();
         this.dispose();
     }//GEN-LAST:event_jBAsignaturasActionPerformed
 
     private void jBInformacionBasicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBInformacionBasicaActionPerformed
         EstudiantePersonalInfo est_info = new EstudiantePersonalInfo(); //nueva ventana de información personal
         est_info.setVisible(true);
+        est_info.rellenar_tabla1();
         this.dispose();
     }//GEN-LAST:event_jBInformacionBasicaActionPerformed
 
@@ -258,6 +288,7 @@ public class EstudianteDel extends javax.swing.JFrame {
         EstudianteSol est_sol = new EstudianteSol(); // nueva ventana de solicitudes para estudiante
         est_sol.setVisible(true);
         est_sol.rellenar_tabla1();
+        est_sol.rellenar_tabla2();
         this.dispose(); 
     }//GEN-LAST:event_jBSolicitudesActionPerformed
 

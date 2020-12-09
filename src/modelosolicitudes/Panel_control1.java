@@ -113,8 +113,10 @@ public class Panel_control1 extends javax.swing.JFrame {
             System.out.println("cargo" + Cargo_User);
             EstudianteAsignaturas est1 = new EstudianteAsignaturas();
             est1.setVisible(true);
+            est1.rellenar_tabla2();
+            est1.rellenar_tabla1();
             this.dispose();
-            EstudianteSol llenarTabla1 = new EstudianteSol();
+            
             
            
             

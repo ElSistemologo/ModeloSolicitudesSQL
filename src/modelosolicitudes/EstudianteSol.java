@@ -6,6 +6,7 @@ package modelosolicitudes;
  * and open the template in the editor.
  */
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -331,24 +332,70 @@ public class EstudianteSol extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    public void rellenar_tabla1(){
-    int usuarioID = Login.idUsuario;
+    
+    public void rellenar_tabla2(){
+    String usuarioID = Login.usuario;
         try{
             Class.forName("com.mysql.jdbc.Driver");
             Connection conexion = DriverManager.getConnection(server,user,password);
             
-            Statement st =  conexion.createStatement();
-            String sql = "SELECT sol_id, Nombre_Secretario, sol_Fecha, tip_tipo, estSol_nombre FROM vw_SolicitudesTodasEst where per_id_Estudiante ="+ usuarioID ;
-            ResultSet rs = st.executeQuery(sql);
+            // Statement st =  conexion.createStatement();
+            String sql = "CALL proc_est_solicitudes_aceptadas(?)" ;
+            CallableStatement st = conexion.prepareCall(sql);
+            st.setString(1, usuarioID);
+            st.execute();
+            ResultSet rs = st.getResultSet();
+            
             
             while (rs.next()) {   
                 //Datos se agregaran hasta que finalice
                 String NumeroSolicitud = String.valueOf(rs.getInt("sol_id"));
                 String Nombre_Secretario = String.valueOf(rs.getString("Nombre_Secretario"));
                 String Fecha_Solicitud = String.valueOf(rs.getDate("sol_Fecha"));
-                String Tipo_Solicitud = String.valueOf(rs.getString("tip_tipo"));
-                String Estado_Solicitud = String.valueOf(rs.getString("estSol_nombre"));
+                String Tipo_Solicitud = String.valueOf(rs.getString("Tipo_Solicitud"));
+                String Fecha_Comite = String.valueOf(rs.getString("Fecha_Comite_Curricular"));
+                String Fecha_Consejo = String.valueOf(rs.getString("Fecha_Comite_Curricular"));
+                
+                //String Array para almacenar los datos en el Jtable
+                
+                String tbData[] = {NumeroSolicitud,Nombre_Secretario,Fecha_Solicitud,Tipo_Solicitud,Fecha_Comite,Fecha_Consejo};
+                DefaultTableModel tblModel = (DefaultTableModel)jTSolAprobadas.getModel();
+                
+                //Finalmente se añade el lo contenido en el String Array al jtable
+                
+                tblModel.addRow(tbData);
+                
+            }
+            
+            System.out.println("Datos agregados a la tabla 2");
+            //conexion.close();
+        }catch(Exception e){
+            System.out.println(e.getMessage()+ "No se pudo hacer la coneccion");
+        }
+    }
+    
+        
+    public void rellenar_tabla1(){
+    String usuarioID = Login.usuario;
+        try{
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection conexion = DriverManager.getConnection(server,user,password);
+            
+            // Statement st =  conexion.createStatement();
+            String sql = "CALL proc_est_solicitudes_no_aceptadas(?)" ;
+            CallableStatement st = conexion.prepareCall(sql);
+            st.setString(1, usuarioID);
+            st.execute();
+            ResultSet rs = st.getResultSet();
+            
+            
+            while (rs.next()) {   
+                //Datos se agregaran hasta que finalice
+                String NumeroSolicitud = String.valueOf(rs.getInt("sol_id"));
+                String Nombre_Secretario = String.valueOf(rs.getString("Nombre_Secretario"));
+                String Fecha_Solicitud = String.valueOf(rs.getDate("Fecha_Recepcion"));
+                String Tipo_Solicitud = String.valueOf(rs.getString("TipoSolicitud"));
+                String Estado_Solicitud = String.valueOf(rs.getString("Estado"));
                 
                 //String Array para almacenar los datos en el Jtable
                 
@@ -361,12 +408,12 @@ public class EstudianteSol extends javax.swing.JFrame {
                 
             }
             
-            System.out.println("Datos agregados a la tabla");
+            System.out.println("Datos agregados a la tabla 1");
             //conexion.close();
         }catch(Exception e){
             System.out.println(e.getMessage()+ "No se pudo hacer la coneccion");
         }
-    }    
+    }      
     
     
     private void jBRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRegresarActionPerformed
@@ -378,12 +425,15 @@ public class EstudianteSol extends javax.swing.JFrame {
     private void jBAsignaturasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAsignaturasActionPerformed
         EstudianteAsignaturas est_asig = new EstudianteAsignaturas(); //nueva ventana de asignaturas
         est_asig.setVisible(true);
+        est_asig.rellenar_tabla2();
+        est_asig.rellenar_tabla1();
         this.dispose();
     }//GEN-LAST:event_jBAsignaturasActionPerformed
 
     private void jBInformacionBasicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBInformacionBasicaActionPerformed
         EstudiantePersonalInfo est_info = new EstudiantePersonalInfo(); //nueva ventana de información personal
         est_info.setVisible(true);
+        est_info.rellenar_tabla1();
         this.dispose();
     }//GEN-LAST:event_jBInformacionBasicaActionPerformed
 
@@ -404,6 +454,7 @@ public class EstudianteSol extends javax.swing.JFrame {
     private void jBSol3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSol3ActionPerformed
         EstudianteDel est_del = new EstudianteDel(); //nueva ventana de eliminar solicitud
         est_del.setVisible(true);
+        est_del.rellenar_tabla1();
         this.dispose();
     }//GEN-LAST:event_jBSol3ActionPerformed
 
