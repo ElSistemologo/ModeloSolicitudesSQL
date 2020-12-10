@@ -5,6 +5,15 @@
  */
 package modelosolicitudes;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import static modelosolicitudes.ModeloSolicitudes.password;
+import static modelosolicitudes.ModeloSolicitudes.server;
+import static modelosolicitudes.ModeloSolicitudes.user;
+
 /**
  *
  * @author Usuario
@@ -31,7 +40,7 @@ public class TipoSolicitud extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jSPDescripcion = new javax.swing.JScrollPane();
         jTADescripcion = new javax.swing.JTextArea();
-        jCBTipo = new javax.swing.JComboBox<>();
+        jCBTipoSol2 = new javax.swing.JComboBox<>();
         jBRegresar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -70,7 +79,12 @@ public class TipoSolicitud extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jCBTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Inscripción de asignaturas", "Cursar menos de la carga mínima", "Cancelación de asignaturas", "Cancelación periodo académico", "Reserva de cupo adicional", "Homologación/Convalidación/Equivalencia", "Traslado", "Reingreso", "Doble titulación", "Reembolsos", "Inscripción trabajo de grado", "otro" }));
+        jCBTipoSol2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1.Inscripción de asignaturas", "2.Cursar menos de la carga mínima", "3.Cancelación de asignaturas", "4.Cancelación periodo académico", "5.Reserva de cupo adicional", "6.Homologación/Convalidación/Equivalencia", "7.Traslado", "8.Reingreso", "9.Doble titulación", "10.Reembolsos", "11.Inscripción trabajo de grado", "12.otro" }));
+        jCBTipoSol2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCBTipoSol2ActionPerformed(evt);
+            }
+        });
 
         jBRegresar.setText("Regresar");
         jBRegresar.addActionListener(new java.awt.event.ActionListener() {
@@ -87,7 +101,7 @@ public class TipoSolicitud extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jCBTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCBTipoSol2, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBRegresar))
                 .addContainerGap(19, Short.MAX_VALUE))
         );
@@ -99,7 +113,7 @@ public class TipoSolicitud extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jCBTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jCBTipoSol2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jBRegresar)))
                 .addContainerGap())
@@ -124,6 +138,34 @@ public class TipoSolicitud extends javax.swing.JFrame {
         est_sol.setVisible(true);
         this.dispose(); 
     }//GEN-LAST:event_jBRegresarActionPerformed
+
+    private void jCBTipoSol2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBTipoSol2ActionPerformed
+        // TODO add your handling code here:
+        String TipSol = (String)jCBTipoSol2.getSelectedItem();
+        String tipoSoli = TipSol.substring(0,1);
+        int tipoSoli2 = Integer.parseInt(tipoSoli);
+       
+        try {
+            
+            Statement s;
+            
+            Connection conexion = DriverManager.getConnection(server,user,password);
+            s = conexion.createStatement();
+            ResultSet rs = s.executeQuery("select tip_comentarios_especificos from tipo_solicitud");
+            while (rs.next()) {
+            jTADescripcion.setText(rs.getString(1));
+            
+            //jTADescripcion.setText(rs.getString(3));
+            }
+            }
+            catch (SQLException ex) {
+            System.err.println("SQLException: " + ex.getMessage());
+            } 
+        
+        
+        
+        
+    }//GEN-LAST:event_jCBTipoSol2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -165,7 +207,7 @@ public class TipoSolicitud extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBRegresar;
-    private javax.swing.JComboBox<String> jCBTipo;
+    private javax.swing.JComboBox<String> jCBTipoSol2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jSPDescripcion;

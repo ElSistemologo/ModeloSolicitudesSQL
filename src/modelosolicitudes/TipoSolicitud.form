@@ -54,7 +54,7 @@
                   <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="jCBTipo" min="-2" pref="300" max="-2" attributes="0"/>
+                      <Component id="jCBTipoSol2" min="-2" pref="300" max="-2" attributes="0"/>
                       <Component id="jBRegresar" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="19" max="32767" attributes="0"/>
@@ -70,7 +70,7 @@
                           <Component id="jPanel2" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
-                          <Component id="jCBTipo" min="-2" max="-2" attributes="0"/>
+                          <Component id="jCBTipoSol2" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                           <Component id="jBRegresar" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -144,25 +144,28 @@
             </Container>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JComboBox" name="jCBTipo">
+        <Component class="javax.swing.JComboBox" name="jCBTipoSol2">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="12">
-                <StringItem index="0" value="Inscripci&#xf3;n de asignaturas"/>
-                <StringItem index="1" value="Cursar menos de la carga m&#xed;nima"/>
-                <StringItem index="2" value="Cancelaci&#xf3;n de asignaturas"/>
-                <StringItem index="3" value="Cancelaci&#xf3;n periodo acad&#xe9;mico"/>
-                <StringItem index="4" value="Reserva de cupo adicional"/>
-                <StringItem index="5" value="Homologaci&#xf3;n/Convalidaci&#xf3;n/Equivalencia"/>
-                <StringItem index="6" value="Traslado"/>
-                <StringItem index="7" value="Reingreso"/>
-                <StringItem index="8" value="Doble titulaci&#xf3;n"/>
-                <StringItem index="9" value="Reembolsos"/>
-                <StringItem index="10" value="Inscripci&#xf3;n trabajo de grado"/>
-                <StringItem index="11" value="otro"/>
+                <StringItem index="0" value="1.Inscripci&#xf3;n de asignaturas"/>
+                <StringItem index="1" value="2.Cursar menos de la carga m&#xed;nima"/>
+                <StringItem index="2" value="3.Cancelaci&#xf3;n de asignaturas"/>
+                <StringItem index="3" value="4.Cancelaci&#xf3;n periodo acad&#xe9;mico"/>
+                <StringItem index="4" value="5.Reserva de cupo adicional"/>
+                <StringItem index="5" value="6.Homologaci&#xf3;n/Convalidaci&#xf3;n/Equivalencia"/>
+                <StringItem index="6" value="7.Traslado"/>
+                <StringItem index="7" value="8.Reingreso"/>
+                <StringItem index="8" value="9.Doble titulaci&#xf3;n"/>
+                <StringItem index="9" value="10.Reembolsos"/>
+                <StringItem index="10" value="11.Inscripci&#xf3;n trabajo de grado"/>
+                <StringItem index="11" value="12.otro"/>
               </StringArray>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCBTipoSol2ActionPerformed"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
