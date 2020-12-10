@@ -335,7 +335,7 @@ public class SecretarioSol extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setText("id Estudiante:");
+        jLabel2.setText("Username Estudiante:");
 
         jTextAComents.setColumns(20);
         jTextAComents.setRows(5);
@@ -475,8 +475,11 @@ public class SecretarioSol extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         int usuarioID = Login.idUsuario;
+        
+        
         //String idEst = jTextIDEst.getText();
-        int idEst = Integer.parseInt(this.jTextIDEst.getText());
+        String UserEst = this.jTextIDEst.getText();
+        int idEst = ModeloSolicitudes.GETIdUsuario(UserEst);
         String Coment = jTextAComents.getText();
         String TipSol = (String)jCBTipoSol.getSelectedItem();
         String tipoSoli = TipSol.substring(0,1);
